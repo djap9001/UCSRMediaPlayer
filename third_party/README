@@ -1,0 +1,2 @@
+Directory holder.
+Required third party libraries and headers will be checked out, built and placed here by build scripts.
