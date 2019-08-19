@@ -20,7 +20,7 @@ namespace DjapUtils {
 
 Mutex::Mutex() {
     _is_init = false;
-    if (0 == pthread_mutex_init(&_mutex, NULL)) {
+    if (0 == pthread_mutex_init(&_mutex, nullptr)) {
         _is_init = true;
     }
 }
@@ -47,6 +47,10 @@ void Mutex::unlock() {
     if (0 != pthread_mutex_unlock(&_mutex)) {
         throw Exception(std::string("Unlocking mutex failed!"));
     }
+}
+
+pthread_mutex_t* Mutex::underlying_mutex() {
+    return &_mutex;
 }
 
 } // namespace DjapUtils

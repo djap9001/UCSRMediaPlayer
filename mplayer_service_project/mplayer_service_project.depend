@@ -23,3 +23,31 @@
 	<stdio.h>
 	"djap_utils/include/mutex.hpp"
 
+1565794445 source:/home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/djap_utils/src/Exception.cpp
+	"djap_utils/include/Exception.hpp"
+
+1565794466 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer//djap_utils/include/Exception.hpp
+	<stdexcept>
+	<list>
+
+1565795813 source:/home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/djap_utils/src/mutex.cpp
+	"djap_utils/include/mutex.hpp"
+
+1566225423 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer//djap_utils/include/mutex.hpp
+	<pthread.h>
+	"djap_utils/include/Exception.hpp"
+
+1565795881 source:/home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/djap_utils/src/mutex_guard.cpp
+	"djap_utils/include/mutex_guard.hpp"
+
+1565795534 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer//djap_utils/include/mutex_guard.hpp
+	"djap_utils/include/mutex.hpp"
+
+1565713845 source:/home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/djap_utils/src/shared_pointer_base.cpp
+
+1565713888 source:/home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/djap_utils/src/thread.cpp
+
+1565795730 source:/home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/mplayer_service/src/main.cpp
+	<stdio.h>
+	"djap_utils/include/mutex.hpp"
+

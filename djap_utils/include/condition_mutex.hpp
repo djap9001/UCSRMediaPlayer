@@ -12,32 +12,29 @@
  */
 
  /*
-  * C++ mutex class with suppport for pthread_mutex or bthread_mutex
-  * as underlying mutex implementation
+  * C++ condition class with suppport for pthread_cond or bthread_cond
+  * as underlying condition implementation.
+  * This class subclasses Mutex, which will be used or all wait calls since
+  * for now this should be enough for all my use cases.
   */
-#ifndef _DJAP_UTILS_MUTEX_HPP_
-#define _DJAP_UTILS_MUTEX_HPP_
-// TODO add bthread support and required macros
-// TODO add read/write lock support
 
-#include <pthread.h>
-#include "djap_utils/include/Exception.hpp"
+#include "djap_utils/include/mutex.hpp"
 
 namespace DjapUtils {
 
-class Mutex {
+class ConditionMutex : public Mutex{
 public:
-    Mutex();
-    ~Mutex();
-    void lock();
-    void unlock();
-protected:
-    pthread_mutex_t* underlying_mutex();
+    ConditionMutex();
+    ~ConditionMutex();
+    void Wait();
+    // TODO TimedWait();
+    void Signal();
+    void Broadcast();
+
 private:
-    pthread_mutex_t _mutex;
-    bool _is_init;
-};
+    pthread_cond_t _cond;
+    bool _is_cond_init;
 
-} // namespace DjapUtils
+  };
 
-#endif // _DJAP_UTILS_MUTEX_HPP_
+  } // namespace DjapUtils
