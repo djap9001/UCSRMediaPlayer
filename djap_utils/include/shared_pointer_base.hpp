@@ -14,28 +14,27 @@
  /*
   * Base class and control object for custom shared and weak pointer implementations.
   */
-  
+
 #ifndef _DJAP_UTILS_SHARED_POINTER_BASE_
 #define _DJAP_UTILS_SHARED_POINTER_BASE_
+
+#include "djap_utils/include/mutex.hpp"
 
 namespace DjapUtils {
 
 class ManagedPointerControlObject {
 public:
-    ManagedPointerControlObject(void* managed_pointer) {
-        _managed_pointer = managed_pointer;
-        _strong_reference_count = 0;
-        _weak_reference_count = 0;
-    };
-    ManagedPointerControlObject() {};
+    ManagedPointerControlObject(void* managed_pointer);
+    ~ManagedPointerControlObject();
 
-    void ref_strong();
-    void ref_weak();
+    void add_ref_strong();
+    void add_ref_weak();
 
     // if *managed_pointer_out != NULL on return, strong references reached 0, cast and delete *managed_pointer_out.
     // if return == true, both strong and weak references are at 0, delete the control object
     bool deref_strong(void** managed_pointer_out);
     bool deref_weak();
+    void* managed_pointer();
 private:
     uint32_t _strong_reference_count;
     uint32_t _weak_reference_count;
@@ -45,7 +44,8 @@ private:
 
 class SharedPointerBase {
 protected:
-    virtual managed_pointer_destruct_fn(void* ptr) = 0;
+    virtual void deref() = 0;
+    virtual void add_ref() = 0;
 };
 
 }

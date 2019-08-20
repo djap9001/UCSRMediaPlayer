@@ -17,6 +17,8 @@
 #ifndef _DJAP_UTILS_MUTEX_GUARD_HPP_
 #define _DJAP_UTILS_MUTEX_GUARD_HPP_
 
+// TODO add bthread support and required macros
+
 #include "djap_utils/include/mutex.hpp"
 
 namespace DjapUtils {
