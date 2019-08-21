@@ -43,6 +43,9 @@ private:
 };
 
 class SharedPointerBase {
+public:
+    SharedPointerBase(){}
+    virtual ~SharedPointerBase(){}
 protected:
     virtual void deref() = 0;
     virtual void add_ref() = 0;

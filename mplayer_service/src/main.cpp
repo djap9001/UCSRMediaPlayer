@@ -2,6 +2,7 @@
 #include "djap_utils/include/mutex.hpp"
 #include "djap_utils/include/condition_mutex.hpp"
 #include "djap_utils/include/shared_pointer.hpp"
+#include "djap_utils/include/thread.hpp"
 
 using std::cout;
 using std::endl;
@@ -13,6 +14,15 @@ public:
     }
     ~SharedPointerTester() {
         cout << "Shared pointer tester deleted" << endl;
+    }
+};
+
+class ThreadTester : public DjapUtils::Thread
+{
+protected:
+    // implement
+    void thread_main() {
+        return;
     }
 };
 
@@ -40,11 +50,18 @@ int main(int argc, char** argv) {
     }
 
     // Test shared and weak pointers
+    DjapUtils::SharedPointer<SharedPointerTester> assign_to_here;
     do {
-        // Should delete once, TODO more tests later once implementation is complete
-        DjapUtils::SharedPointer<SharedPointerTester> ptr1(new SharedPointerTester());
-        DjapUtils::SharedPointer<SharedPointerTester> ptr2(ptr1);
+        do {
+            // Should delete once, TODO more tests later once implementation is complete
+            DjapUtils::SharedPointer<SharedPointerTester> ptr1(new SharedPointerTester());
+            DjapUtils::SharedPointer<SharedPointerTester> ptr2(ptr1);
+            assign_to_here = ptr2;  // quick test assign operator
+        } while(0);
+        cout << "Shared pointer tester should be deleted in a moment..." << endl;
     } while(0);
+
+    DjapUtils::SharedPointer<ThreadTester> test_thread(DjapUtils::Thread::alloc<ThreadTester>());
 
     return 0;
 }

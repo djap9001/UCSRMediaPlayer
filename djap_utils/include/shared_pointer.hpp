@@ -24,14 +24,26 @@ namespace DjapUtils {
 template <class PointerType>
 class SharedPointer : public SharedPointerBase {
 public:
+    SharedPointer() {
+        _control_object = new ManagedPointerControlObject(nullptr);
+        _control_object->add_ref_strong();
+    }
     SharedPointer(PointerType* raw_ptr) {
         _control_object = new ManagedPointerControlObject(raw_ptr);
         _control_object->add_ref_strong();
     }
 
-    SharedPointer(SharedPointer<PointerType>& other) {
+    SharedPointer(const SharedPointer<PointerType>& other) {
         _control_object = other._control_object;
         _control_object->add_ref_strong();
+    }
+
+    SharedPointer<PointerType>& operator= (const SharedPointer<PointerType>& other) {
+        ManagedPointerControlObject* control = other._control_object;
+        control->add_ref_strong();
+        deref();
+        _control_object = control;
+        return *this;
     }
 
     ~SharedPointer() {
