@@ -1,4 +1,5 @@
 #include <iostream>
+#include <unistd.h>
 #include "djap_utils/include/mutex.hpp"
 #include "djap_utils/include/condition_mutex.hpp"
 #include "djap_utils/include/shared_pointer.hpp"
@@ -22,8 +23,15 @@ class ThreadTester : public DjapUtils::Thread
 protected:
     // implement
     void thread_main() {
+        cout << "Thread tester started" << endl;
+        sleep(1);
+        cout << "Thread tester exitting" << endl;
         return;
     }
+    virtual ~ThreadTester() {
+        cout << "Thread tester deleted" << endl;
+    }
+    friend class DjapUtils::SharedPointer<ThreadTester>;
 };
 
 int main(int argc, char** argv) {
@@ -50,18 +58,26 @@ int main(int argc, char** argv) {
     }
 
     // Test shared and weak pointers
-    DjapUtils::SharedPointer<SharedPointerTester> assign_to_here;
+    DjapUtils::WeakPointer<SharedPointerTester> weak_test;
     do {
+        DjapUtils::SharedPointer<SharedPointerTester> assign_to_here;
         do {
             // Should delete once, TODO more tests later once implementation is complete
             DjapUtils::SharedPointer<SharedPointerTester> ptr1(new SharedPointerTester());
             DjapUtils::SharedPointer<SharedPointerTester> ptr2(ptr1);
             assign_to_here = ptr2;  // quick test assign operator
+            weak_test = assign_to_here.to_weak();
         } while(0);
+        DjapUtils::SharedPointer<SharedPointerTester> back_from_weak(weak_test);
         cout << "Shared pointer tester should be deleted in a moment..." << endl;
+        printf("assign_to_here_raw: %p, back_from_weak: %p\n", assign_to_here.raw_ptr(), back_from_weak.raw_ptr());
     } while(0);
+    DjapUtils::SharedPointer<SharedPointerTester> back_from_weak2(weak_test);
+    printf("back_from_weak2: %p (should be nullptr now)\n", back_from_weak2.raw_ptr());
 
     DjapUtils::SharedPointer<ThreadTester> test_thread(DjapUtils::Thread::alloc<ThreadTester>());
-
+    test_thread->Start();
+    test_thread->Join();
+    cout << "Ending.." << endl;
     return 0;
 }

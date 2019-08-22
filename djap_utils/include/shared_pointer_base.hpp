@@ -22,6 +22,8 @@
 
 namespace DjapUtils {
 
+class Thread;
+
 class ManagedPointerControlObject {
 public:
     ManagedPointerControlObject(void* managed_pointer);
@@ -49,6 +51,13 @@ public:
 protected:
     virtual void deref() = 0;
     virtual void add_ref() = 0;
+    virtual void set_control_object(ManagedPointerControlObject* control) = 0;
+    virtual void copy_from(const SharedPointerBase* other) {
+        set_control_object(other->_control_object);
+    }
+    ManagedPointerControlObject* _control_object;
+
+    friend class Thread;    // allow access to copy_from
 };
 
 }

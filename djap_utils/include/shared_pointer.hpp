@@ -18,6 +18,7 @@
 #define _DJAP_UTILS_SHARED_POINTER_
 
 #include "djap_utils/include/shared_pointer_base.hpp"
+#include "djap_utils/include/weak_pointer.hpp"
 
 namespace DjapUtils {
 
@@ -28,6 +29,7 @@ public:
         _control_object = new ManagedPointerControlObject(nullptr);
         _control_object->add_ref_strong();
     }
+
     SharedPointer(PointerType* raw_ptr) {
         _control_object = new ManagedPointerControlObject(raw_ptr);
         _control_object->add_ref_strong();
@@ -39,11 +41,22 @@ public:
     }
 
     SharedPointer<PointerType>& operator= (const SharedPointer<PointerType>& other) {
-        ManagedPointerControlObject* control = other._control_object;
-        control->add_ref_strong();
-        deref();
-        _control_object = control;
+        copy_from(&other);
         return *this;
+    }
+
+    SharedPointer(const WeakPointer<PointerType>& other) {
+        _control_object = other._control_object;
+        _control_object->add_ref_strong();
+    }
+
+    SharedPointer<PointerType>& operator= (const WeakPointer<PointerType>& other) {
+        copy_from(&other);
+        return *this;
+    }
+
+    PointerType* operator-> () {
+        return static_cast<PointerType*>(_control_object->managed_pointer());
     }
 
     ~SharedPointer() {
@@ -51,7 +64,13 @@ public:
     }
 
     PointerType* raw_ptr() {
-        return _control_object->managed_pointer();
+        return static_cast<PointerType*>(_control_object->managed_pointer());
+    }
+
+    WeakPointer<PointerType> to_weak() {
+        WeakPointer<PointerType> weak;
+        weak.copy_from(this);
+        return weak;
     }
 
 protected:
@@ -70,8 +89,14 @@ protected:
         _control_object->add_ref_strong();
     }
 
-private:
-    ManagedPointerControlObject* _control_object;
+    virtual void set_control_object(ManagedPointerControlObject* control) {
+        if (nullptr == control) {
+            control = new ManagedPointerControlObject(nullptr);
+        }
+        control->add_ref_strong();
+        deref();
+        _control_object = control;
+    }
 };
 
 }
