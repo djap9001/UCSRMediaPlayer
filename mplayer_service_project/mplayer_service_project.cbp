@@ -13,11 +13,10 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add option="-D_USE_BAIDU_THREADS_" />
 					<Add directory="../" />
+					<Add directory="../third_party/brpc/include" />
 				</Compiler>
-				<Linker>
-					<Add library="pthread" />
-				</Linker>
 			</Target>
 			<Target title="Release">
 				<Option output="bin/Release/mplayer_service_project" prefix_auto="1" extension_auto="1" />
@@ -26,6 +25,8 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add option="-D_USE_BAIDU_THREADS_" />
+					<Add directory="../" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -35,9 +36,16 @@
 		<Compiler>
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
+			<Add option="-D_USE_BAIDU_THREADS_" />
+			<Add directory="../" />
+			<Add directory="../third_party/brpc/include" />
 		</Compiler>
+		<Linker>
+			<Add library="pthread" />
+			<Add library="../third_party/brpc/lib/libbrpc.so" />
+		</Linker>
 		<Unit filename="../djap_utils/include/Exception.hpp" />
-		<Unit filename="../djap_utils/include/condition.hpp" />
+		<Unit filename="../djap_utils/include/condition_mutex.hpp" />
 		<Unit filename="../djap_utils/include/mutex.hpp" />
 		<Unit filename="../djap_utils/include/mutex_guard.hpp" />
 		<Unit filename="../djap_utils/include/shared_pointer.hpp" />
@@ -45,7 +53,7 @@
 		<Unit filename="../djap_utils/include/thread.hpp" />
 		<Unit filename="../djap_utils/include/weak_pointer.hpp" />
 		<Unit filename="../djap_utils/src/Exception.cpp" />
-		<Unit filename="../djap_utils/src/condition.cpp" />
+		<Unit filename="../djap_utils/src/condition_mutex.cpp" />
 		<Unit filename="../djap_utils/src/mutex.cpp" />
 		<Unit filename="../djap_utils/src/mutex_guard.cpp" />
 		<Unit filename="../djap_utils/src/shared_pointer_base.cpp" />

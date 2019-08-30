@@ -2,24 +2,54 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="../djap_utils/src/mutex_guard.cpp" open="1" top="1" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="../djap_utils/src/thread.cpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="817" topLine="0" />
+			<Cursor1 position="811" topLine="24" />
+		</Cursor>
+	</File>
+	<File name="../djap_utils/src/shared_pointer_base.cpp" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1380" topLine="3" />
+		</Cursor>
+	</File>
+	<File name="../djap_utils/include/shared_pointer.hpp" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2559" topLine="71" />
+		</Cursor>
+	</File>
+	<File name="../djap_utils/src/condition_mutex.cpp" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2185" topLine="48" />
 		</Cursor>
 	</File>
 	<File name="../djap_utils/include/mutex.hpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="912" topLine="12" />
+			<Cursor1 position="1102" topLine="20" />
 		</Cursor>
 	</File>
-	<File name="../mplayer_service/src/main.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="../djap_utils/src/mutex.cpp" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="203" topLine="0" />
+			<Cursor1 position="830" topLine="40" />
 		</Cursor>
 	</File>
-	<File name="../djap_utils/src/mutex.cpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="../djap_utils/include/mutex_guard.hpp" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="740" topLine="3" />
+			<Cursor1 position="873" topLine="12" />
+		</Cursor>
+	</File>
+	<File name="../djap_utils/src/Exception.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="925" topLine="4" />
+		</Cursor>
+	</File>
+	<File name="../djap_utils/include/condition_mutex.hpp" open="1" top="1" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1098" topLine="15" />
+		</Cursor>
+	</File>
+	<File name="../djap_utils/src/mutex_guard.cpp" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="820" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="../djap_utils/include/Exception.hpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -27,19 +57,24 @@
 			<Cursor1 position="899" topLine="3" />
 		</Cursor>
 	</File>
-	<File name="../djap_utils/include/shared_pointer_base.hpp" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="../djap_utils/include/shared_pointer_base.hpp" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="779" topLine="4" />
+			<Cursor1 position="1911" topLine="23" />
 		</Cursor>
 	</File>
-	<File name="../djap_utils/include/mutex_guard.hpp" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="../djap_utils/include/thread.hpp" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="743" topLine="5" />
+			<Cursor1 position="3265" topLine="49" />
 		</Cursor>
 	</File>
-	<File name="../djap_utils/src/Exception.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="../mplayer_service/src/main.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="925" topLine="4" />
+			<Cursor1 position="1022" topLine="15" />
+		</Cursor>
+	</File>
+	<File name="../djap_utils/include/weak_pointer.hpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1955" topLine="47" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

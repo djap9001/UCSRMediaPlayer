@@ -19,8 +19,11 @@
 #define _DJAP_UTILS_MUTEX_HPP_
 // TODO add bthread support and required macros
 // TODO add read/write lock support
-
+#ifdef _USE_BAIDU_THREADS_
+#include "bthread/bthread.h"
+#else
 #include <pthread.h>
+#endif
 #include "djap_utils/include/Exception.hpp"
 
 namespace DjapUtils {
@@ -32,9 +35,17 @@ public:
     void lock();
     void unlock();
 protected:
+#ifdef _USE_BAIDU_THREADS_
+    bthread_mutex_t* underlying_mutex();
+#else
     pthread_mutex_t* underlying_mutex();
+#endif
 private:
+#ifdef _USE_BAIDU_THREADS_
+    bthread_mutex_t _mutex;
+#else
     pthread_mutex_t _mutex;
+#endif
     bool _is_init;
 };
 

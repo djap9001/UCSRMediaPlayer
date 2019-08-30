@@ -20,14 +20,24 @@ namespace DjapUtils {
 
 Mutex::Mutex() {
     _is_init = false;
+#ifdef _USE_BAIDU_THREADS_
+    if (0 == bthread_mutex_init(&_mutex, nullptr)) {
+        _is_init = true;
+    }
+#else
     if (0 == pthread_mutex_init(&_mutex, nullptr)) {
         _is_init = true;
     }
+#endif
 }
 
 Mutex::~Mutex() {
     if (true == _is_init) {
+#ifdef _USE_BAIDU_THREADS_
+        bthread_mutex_destroy(&_mutex);
+#else
         pthread_mutex_destroy(&_mutex);
+#endif
     }
 }
 
@@ -35,21 +45,36 @@ void Mutex::lock() {
     if (false == _is_init) {
         throw Exception(std::string("Trying to lock uninitialized mutex!"));
     }
+#ifdef _USE_BAIDU_THREADS_
+    if (0 != bthread_mutex_lock(&_mutex)) {
+        throw Exception(std::string("Locking mutex failed!"));
+    }
+#else
     if (0 != pthread_mutex_lock(&_mutex)) {
         throw Exception(std::string("Locking mutex failed!"));
     }
+#endif
 }
 
 void Mutex::unlock() {
     if (false == _is_init) {
         throw Exception(std::string("Trying to unlock uninitialized mutex!"));
     }
+#ifdef _USE_BAIDU_THREADS_
+    if (0 != bthread_mutex_unlock(&_mutex)) {
+        throw Exception(std::string("Unlocking mutex failed!"));
+    }
+#else
     if (0 != pthread_mutex_unlock(&_mutex)) {
         throw Exception(std::string("Unlocking mutex failed!"));
     }
+#endif
 }
-
+#ifdef _USE_BAIDU_THREADS_
+bthread_mutex_t* Mutex::underlying_mutex() {
+#else
 pthread_mutex_t* Mutex::underlying_mutex() {
+#endif
     return &_mutex;
 }
 

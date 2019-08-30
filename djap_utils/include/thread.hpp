@@ -27,6 +27,25 @@ namespace DjapUtils {
 
 class Thread {
 public:
+
+    /*
+     * Construct function, use this to allocate new instances of threads
+     * Example:
+     * User has created a class called MyWorkerThread that is a subclass of Thread.
+     * To allocate and run an instance of MyWorkerThread:
+     * void run_my_worker(bool wait_for_it) {
+     *      SharedPointer<MyWorkerThread> t(Thread::alloc<MyWorkerThread>());
+     *      // TODO any additional initialization here (if you need to pass some parameters for MyWorkerThread, implement your own interface for it and call it here)
+     *      t->start();  // starts the execution of MyWorkerThread, you can detach and discard t at this point if you're not interested in Joinining the thread,
+     *                   // Thread can delete it self when it stops running if there are no references to it elsewhere.
+     *      if (true == wait_for_it) {
+     *          t->join();
+     *      } else {
+     *          t->detach();
+     *      }
+     * }
+
+     */
     template <typename ThreadSubclass>
     static SharedPointer<ThreadSubclass> alloc() {
         SharedPointer<ThreadSubclass> ret(new ThreadSubclass());
@@ -35,61 +54,25 @@ public:
         ret->_thread_retainer = new SharedPointer<ThreadSubclass>();
         return ret;
     }
+#ifdef _USE_BAIDU_THREADS_
+    void start_urgent();
+#endif // _USE_BAIDU_THREADS_
+    void start();                   // Launch the thread
+    void join();                    // Wait for the thread to finish
+    void detach();                  // Detach the thread, not going to join() it.
+    static std::string thread_id();  // Unique ID for the calling thread
 
-    void Start() {
-        if (nullptr == _weak_ref) {
-            throw Exception(std::string("This thread is not properly allocated, always use alloc() template function to create new instances of thread classes!"));
-        }
-        if (true == _started) {
-            throw Exception(std::string("Thread can be started only once, create a new one."));
-        }
-        _thread_retainer->copy_from(_weak_ref); // create a strong reference
-        _started = true;
-        if (0 != pthread_create(&_thread_handle, nullptr, &Thread::ThreadStarter, this)) {
-            delete _thread_retainer;
-            _thread_retainer = nullptr;
-            throw Exception(std::string("Failed to create the thread!"));
-        }
-    }
-
-    void Join() {
-        pthread_join(_thread_handle, nullptr);
-    }
-
-    static std::string ThreadID()
-    {
-        // TODO ID of the calling thread
-        return std::string("");
-    }
 protected:
-    virtual void thread_main() = 0;
-    Thread()    // Due to thread object management the constructor and destructor are protected. Call alloc() to allocate an instance of thread
-    {
-        _weak_ref = nullptr;
-        _thread_retainer = nullptr;
-        _started = false;
-    }
-    virtual ~Thread()   // Due to thread object management the constructor and destructor are protected, only shared pointer is allowed to delete the object.
-    {
-        if (nullptr != _weak_ref) {
-            delete _weak_ref;
-            // _thread_retainer is managed in Start() and ThreadStarter()
-        }
-    }
+    virtual void thread_main() = 0; // Override to implement the thread's main function here
+    Thread();                       // Due to thread object management the constructor and destructor are protected. Call alloc() to allocate an instance of thread
+    virtual ~Thread();              // Due to thread object management the constructor and destructor are protected, only shared pointer is allowed to delete the object.
 private:
-    static void* ThreadStarter(void* instance_pointer) {
-        Thread* thread_ptr = static_cast<Thread*>(instance_pointer);
-        try {
-            thread_ptr->thread_main();
-        } catch (std::exception& e) {
-            printf("Caught an exception from thread\n");
-        }
-        SharedPointerBase* destruct_ptr = thread_ptr->_thread_retainer;
-        thread_ptr->_thread_retainer = nullptr;
-        delete destruct_ptr;
-        return nullptr;
-    }
+    static void* thread_starter(void* instance_pointer); // moves the execution to thread_main();
+#ifdef _USE_BAIDU_THREADS_
+    bthread_t _thread_handle;
+#else
     pthread_t _thread_handle;
+#endif // _USE_BAIDU_THREADS_
     SharedPointerBase* _thread_retainer;    // keeps the object alive as long as thread is running.
     SharedPointerBase* _weak_ref;           // allow Start() to create a strong reference, user don't need to pass it in.
     bool _started;
