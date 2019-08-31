@@ -51,7 +51,11 @@
 1567092299 source:/home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/djap_utils/src/thread.cpp
 	"djap_utils/include/thread.hpp"
 
-1567175873 source:/home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/mplayer_service/src/main.cpp
+1567244054 source:/home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/mplayer_service/src/main.cpp
+	<gflags/gflags.h>
+	<butil/logging.h>
+	<brpc/server.h>
+	"mplayer_service.hpp"
 	<iostream>
 	<unistd.h>
 	<time.h>
@@ -60,7 +64,7 @@
 	"djap_utils/include/shared_pointer.hpp"
 	"djap_utils/include/thread.hpp"
 
-1567176259 source:/home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/djap_utils/src/condition_mutex.cpp
+1567176613 source:/home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/djap_utils/src/condition_mutex.cpp
 	"djap_utils/include/condition_mutex.hpp"
 
 1567176328 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer//djap_utils/include/condition_mutex.hpp
@@ -428,4 +432,398 @@
 1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/bthread/id.h
 	"butil/macros.h"
 	"bthread/types.h"
+
+1567241896 source:/home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/player_interface/player_service.pb.cc
+	"player_service.pb.h"
+	<algorithm>
+	<google/protobuf/stubs/common.h>
+	<google/protobuf/stubs/port.h>
+	<google/protobuf/io/coded_stream.h>
+	<google/protobuf/wire_format_lite_inl.h>
+	<google/protobuf/descriptor.h>
+	<google/protobuf/generated_message_reflection.h>
+	<google/protobuf/reflection_ops.h>
+	<google/protobuf/wire_format.h>
+	"third_party/protobuf/version.h"
+
+1567241896 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/player_interface/player_service.pb.h
+	<string>
+	<google/protobuf/stubs/common.h>
+	<google/protobuf/io/coded_stream.h>
+	<google/protobuf/arena.h>
+	<google/protobuf/arenastring.h>
+	<google/protobuf/generated_message_table_driven.h>
+	<google/protobuf/generated_message_util.h>
+	<google/protobuf/inlined_string_field.h>
+	<google/protobuf/metadata.h>
+	<google/protobuf/message.h>
+	<google/protobuf/repeated_field.h>
+	<google/protobuf/extension_set.h>
+	<google/protobuf/generated_enum_reflection.h>
+	<google/protobuf/service.h>
+	<google/protobuf/unknown_field_set.h>
+
+1567243274 source:/home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/mplayer_service/src/mplayer_service.cpp
+	<butil/logging.h>
+	<brpc/server.h>
+	"mplayer_service.hpp"
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/brpc/server.h
+	"bthread/errno.h"
+	"bthread/bthread.h"
+	<google/protobuf/service.h>
+	"butil/macros.h"
+	"butil/containers/doubly_buffered_data.h"
+	"bvar/bvar.h"
+	"butil/containers/case_ignored_flat_map.h"
+	"butil/ptr_container.h"
+	"brpc/controller.h"
+	"brpc/ssl_options.h"
+	"brpc/describable.h"
+	"brpc/data_factory.h"
+	"brpc/builtin/tabbed.h"
+	"brpc/details/profiler_linker.h"
+	"brpc/health_reporter.h"
+	"brpc/adaptive_max_concurrency.h"
+	"brpc/http2.h"
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/butil/containers/doubly_buffered_data.h
+	<vector>
+	<pthread.h>
+	"butil/scoped_lock.h"
+	"butil/thread_local.h"
+	"butil/logging.h"
+	"butil/macros.h"
+	"butil/type_traits.h"
+	"butil/errno.h"
+	"butil/atomicops.h"
+	"butil/unique_ptr.h"
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/butil/unique_ptr.h
+	"butil/build_config.h"
+	<memory>
+	<algorithm>
+	"butil/type_traits.h"
+	"butil/macros.h"
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/bvar/bvar.h
+	"bvar/reducer.h"
+	"bvar/recorder.h"
+	"bvar/status.h"
+	"bvar/passive_status.h"
+	"bvar/latency_recorder.h"
+	"bvar/gflag.h"
+	"bvar/scoped_timer.h"
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/bvar/status.h
+	<string>
+	"butil/atomicops.h"
+	"butil/type_traits.h"
+	"butil/string_printf.h"
+	"butil/synchronization/lock.h"
+	"bvar/detail/is_atomical.h"
+	"bvar/variable.h"
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/butil/string_printf.h
+	<string>
+	<stdarg.h>
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/bvar/gflag.h
+	<string>
+	"bvar/variable.h"
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/bvar/scoped_timer.h
+	"butil/time.h"
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/butil/containers/case_ignored_flat_map.h
+	"butil/containers/flat_map.h"
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/butil/containers/flat_map.h
+	<stdint.h>
+	<functional>
+	<iostream>
+	"butil/type_traits.h"
+	"butil/logging.h"
+	"butil/find_cstr.h"
+	"butil/single_threaded_pool.h"
+	"butil/containers/hash_tables.h"
+	"butil/bit_array.h"
+	"butil/strings/string_piece.h"
+	"butil/containers/flat_map_inl.h"
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/butil/find_cstr.h
+	<string>
+	<map>
+	<algorithm>
+	"butil/thread_local.h"
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/butil/single_threaded_pool.h
+	<stdlib.h>
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/butil/bit_array.h
+	<stdint.h>
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/butil/containers/flat_map_inl.h
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/butil/ptr_container.h
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/brpc/controller.h
+	<gflags/gflags.h>
+	"butil/intrusive_ptr.hpp"
+	"bthread/errno.h"
+	"butil/endpoint.h"
+	"butil/iobuf.h"
+	"bthread/types.h"
+	"brpc/options.pb.h"
+	"brpc/errno.pb.h"
+	"brpc/http_header.h"
+	"brpc/authenticator.h"
+	"brpc/socket_id.h"
+	"brpc/stream.h"
+	"brpc/stream_creator.h"
+	"brpc/protocol.h"
+	"brpc/traceprintf.h"
+	"brpc/reloadable_flags.h"
+	"brpc/closure_guard.h"
+	"brpc/callback.h"
+	"brpc/progressive_attachment.h"
+	"brpc/progressive_reader.h"
+	"brpc/grpc.h"
+
+1553888117 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/gflags/gflags.h
+	<string>
+	<vector>
+	"gflags/gflags_declare.h"
+	"gflags_gflags.h"
+
+1553888117 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/gflags/gflags_gflags.h
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/butil/intrusive_ptr.hpp
+	<functional>
+	<cstddef>
+	<ostream>
+	"butil/build_config.h"
+	"butil/containers/hash_tables.h"
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/butil/endpoint.h
+	<netinet/in.h>
+	<iostream>
+	"butil/containers/hash_tables.h"
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/butil/iobuf.h
+	<sys/uio.h>
+	<stdint.h>
+	<string>
+	<ostream>
+	<google/protobuf/io/zero_copy_stream.h>
+	"butil/strings/string_piece.h"
+	"butil/third_party/snappy/snappy-sinksource.h"
+	"butil/zero_copy_stream_as_streambuf.h"
+	"butil/macros.h"
+	"butil/reader_writer.h"
+	"butil/binary_printer.h"
+	<algorithm>
+	<utility>
+	"butil/iobuf_inl.h"
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/butil/third_party/snappy/snappy-sinksource.h
+	<stddef.h>
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/butil/zero_copy_stream_as_streambuf.h
+	<streambuf>
+	<google/protobuf/io/zero_copy_stream.h>
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/butil/reader_writer.h
+	<sys/uio.h>
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/butil/binary_printer.h
+	"butil/strings/string_piece.h"
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/butil/iobuf_inl.h
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/brpc/options.pb.h
+	<string>
+	<google/protobuf/stubs/common.h>
+	<google/protobuf/io/coded_stream.h>
+	<google/protobuf/arena.h>
+	<google/protobuf/arenastring.h>
+	<google/protobuf/generated_message_table_driven.h>
+	<google/protobuf/generated_message_util.h>
+	<google/protobuf/inlined_string_field.h>
+	<google/protobuf/metadata.h>
+	<google/protobuf/message.h>
+	<google/protobuf/repeated_field.h>
+	<google/protobuf/extension_set.h>
+	<google/protobuf/generated_enum_reflection.h>
+	<google/protobuf/unknown_field_set.h>
+	<google/protobuf/descriptor.pb.h>
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/brpc/errno.pb.h
+	<string>
+	<google/protobuf/stubs/common.h>
+	<google/protobuf/io/coded_stream.h>
+	<google/protobuf/arena.h>
+	<google/protobuf/arenastring.h>
+	<google/protobuf/generated_message_table_driven.h>
+	<google/protobuf/generated_message_util.h>
+	<google/protobuf/inlined_string_field.h>
+	<google/protobuf/metadata.h>
+	<google/protobuf/repeated_field.h>
+	<google/protobuf/extension_set.h>
+	<google/protobuf/generated_enum_reflection.h>
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/brpc/http_header.h
+	"butil/strings/string_piece.h"
+	"butil/containers/case_ignored_flat_map.h"
+	"brpc/uri.h"
+	"brpc/http_method.h"
+	"brpc/http_status_code.h"
+	"brpc/http2.h"
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/brpc/uri.h
+	<string>
+	"butil/containers/flat_map.h"
+	"butil/status.h"
+	"butil/string_splitter.h"
+	<algorithm>
+	<utility>
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/butil/status.h
+	<stdarg.h>
+	<stdlib.h>
+	<string>
+	<ostream>
+	"butil/strings/string_piece.h"
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/brpc/http_method.h
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/brpc/http_status_code.h
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/brpc/http2.h
+	"brpc/http_status_code.h"
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/brpc/authenticator.h
+	<ostream>
+	"butil/endpoint.h"
+	"butil/macros.h"
+	"brpc/extension.h"
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/brpc/extension.h
+	<string>
+	"butil/scoped_lock.h"
+	"butil/logging.h"
+	"butil/containers/case_ignored_flat_map.h"
+	"butil/memory/singleton_on_pthread_once.h"
+	"brpc/extension_inl.h"
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/butil/memory/singleton_on_pthread_once.h
+	<pthread.h>
+	"butil/atomicops.h"
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/brpc/extension_inl.h
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/brpc/socket_id.h
+	<stdint.h>
+	"butil/unique_ptr.h"
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/brpc/stream.h
+	"butil/iobuf.h"
+	"butil/scoped_generic.h"
+	"brpc/socket_id.h"
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/butil/scoped_generic.h
+	<stdlib.h>
+	<algorithm>
+	"butil/compiler_specific.h"
+	"butil/move.h"
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/butil/move.h
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/brpc/stream_creator.h
+	"brpc/socket_id.h"
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/brpc/protocol.h
+	<vector>
+	<stdint.h>
+	<gflags/gflags_declare.h>
+	"butil/endpoint.h"
+	"butil/iobuf.h"
+	"butil/logging.h"
+	"brpc/options.pb.h"
+	"brpc/socket_id.h"
+	"brpc/parse_result.h"
+	"brpc/adaptive_connection_type.h"
+	"brpc/adaptive_protocol_type.h"
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/brpc/parse_result.h
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/brpc/adaptive_connection_type.h
+	"butil/strings/string_piece.h"
+	"brpc/options.pb.h"
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/brpc/adaptive_protocol_type.h
+	"butil/strings/string_piece.h"
+	"brpc/options.pb.h"
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/brpc/traceprintf.h
+	"butil/macros.h"
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/brpc/reloadable_flags.h
+	<stdint.h>
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/brpc/closure_guard.h
+	<google/protobuf/service.h>
+	"butil/macros.h"
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/brpc/callback.h
+	<google/protobuf/stubs/common.h>
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/brpc/progressive_attachment.h
+	"butil/atomicops.h"
+	"butil/iobuf.h"
+	"butil/endpoint.h"
+	"bthread/types.h"
+	"brpc/socket_id.h"
+	"brpc/shared_object.h"
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/brpc/shared_object.h
+	"butil/intrusive_ptr.hpp"
+	"butil/atomicops.h"
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/brpc/progressive_reader.h
+	"brpc/shared_object.h"
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/brpc/grpc.h
+	<map>
+	<brpc/http2.h>
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/brpc/ssl_options.h
+	<string>
+	<vector>
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/brpc/describable.h
+	<ostream>
+	"butil/macros.h"
+	"butil/class_name.h"
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/brpc/data_factory.h
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/brpc/builtin/tabbed.h
+	<string>
+	<vector>
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/brpc/details/profiler_linker.h
+	"butil/gperftools_profiler.h"
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/butil/gperftools_profiler.h
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/brpc/health_reporter.h
+	"brpc/controller.h"
+
+1564839806 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/third_party/brpc/include/brpc/adaptive_max_concurrency.h
+	"butil/strings/string_piece.h"
+	"brpc/options.pb.h"
+
+1567242760 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/mplayer_service/include/mplayer_service.hpp
+	"player_service.pb.h"
 

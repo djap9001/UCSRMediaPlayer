@@ -1,5 +1,11 @@
+#include <gflags/gflags.h>
+#include <butil/logging.h>
+#include <brpc/server.h>
+#include "mplayer_service.hpp"
+/*
 #include <iostream>
 #include <unistd.h>
+#include <time.h>
 #include "djap_utils/include/mutex.hpp"
 #include "djap_utils/include/condition_mutex.hpp"
 #include "djap_utils/include/shared_pointer.hpp"
@@ -24,7 +30,6 @@ protected:
     // implement
     void thread_main() {
         cout << "Thread tester started" << endl;
-        sleep(1);
         cout << "Thread tester exitting" << endl;
         return;
     }
@@ -34,12 +39,12 @@ protected:
     friend class DjapUtils::SharedPointer<ThreadTester>;
 };
 
-int main(int argc, char** argv) {
-    // Test exception
+void* bthread_main(void* argc) {
+// Test exception
     try {
         throw DjapUtils::Exception(std::string("Test exception!"));
     } catch (DjapUtils::Exception &e) {
-        cout << "Caught test exception (THIS SHOULD HAPPEN): " << e.error_message() << endl;
+        cout << "[Bthread] Caught test exception (THIS SHOULD HAPPEN): " << e.error_message() << endl;
     }
 
     // Test mutex and condition mutex against exceptions
@@ -54,7 +59,7 @@ int main(int argc, char** argv) {
         test_condition.Signal();    // shouldn't have any issues
         test_condition.Broadcast(); // shouldn't have any issues
     } catch (DjapUtils::Exception &e) {
-        cout << "Caught an exception (SOMETHING IS WRONG HERE...): " << e.error_message() << endl;
+        cout << "[Bthread] Caught an exception (SOMETHING IS WRONG HERE...): " << e.error_message() << endl;
     }
 
     // Test shared and weak pointers
@@ -69,15 +74,55 @@ int main(int argc, char** argv) {
             weak_test = assign_to_here.to_weak();
         } while(0);
         DjapUtils::SharedPointer<SharedPointerTester> back_from_weak(weak_test);
-        cout << "Shared pointer tester should be deleted in a moment..." << endl;
-        printf("assign_to_here_raw: %p, back_from_weak: %p\n", assign_to_here.raw_ptr(), back_from_weak.raw_ptr());
+        cout << "[Bthread] Shared pointer tester should be deleted in a moment..." << endl;
+        printf("[Bthread] assign_to_here_raw: %p, back_from_weak: %p\n", assign_to_here.raw_ptr(), back_from_weak.raw_ptr());
     } while(0);
     DjapUtils::SharedPointer<SharedPointerTester> back_from_weak2(weak_test);
-    printf("back_from_weak2: %p (should be nullptr now)\n", back_from_weak2.raw_ptr());
+    printf("[Bthread] back_from_weak2: %p (should be nullptr now)\n", back_from_weak2.raw_ptr());
 
     DjapUtils::SharedPointer<ThreadTester> test_thread(DjapUtils::Thread::alloc<ThreadTester>());
-    test_thread->Start();
-    test_thread->Join();
-    cout << "Ending.." << endl;
+    test_thread->start_urgent();
+    test_thread->join();
+    cout << "[Bthread] Ending.." << endl;
+    cout << "bthread main will exit now" << endl;
+    return nullptr;
+}
+*/
+
+DEFINE_int32(port, 8000, "TCP Port of this server");
+DEFINE_int32(idle_timeout_s, -1, "Connection will be closed if there is no "
+             "read/write operations during the last `idle_timeout_s'");
+DEFINE_int32(logoff_ms, 2000, "Maximum duration of server's LOGOFF state "
+             "(waiting for client to close connection before server stops)");
+
+int main(int argc, char** argv) {
+    // Parse gflags. We recommend you to use gflags as well.
+    GFLAGS_NAMESPACE::ParseCommandLineFlags(&argc, &argv, true);
+
+    // Generally you only need one Server.
+    brpc::Server server;
+
+    // Instance of your service.
+    player_service::MplayerService player_service;
+
+    // Add the service into server. Notice the second parameter, because the
+    // service is put on stack, we don't want server to delete it, otherwise
+    // use brpc::SERVER_OWNS_SERVICE.
+    if (server.AddService(&player_service,
+                          brpc::SERVER_DOESNT_OWN_SERVICE) != 0) {
+        LOG(ERROR) << "Fail to add service";
+        return -1;
+    }
+
+    // Start the server.
+    brpc::ServerOptions options;
+    options.idle_timeout_sec = FLAGS_idle_timeout_s;
+    if (server.Start(FLAGS_port, &options) != 0) {
+        LOG(ERROR) << "Fail to start EchoServer";
+        return -1;
+    }
+
+    // Wait until Ctrl-C is pressed, then Stop() and Join() the server.
+    server.RunUntilAskedToQuit();
     return 0;
 }

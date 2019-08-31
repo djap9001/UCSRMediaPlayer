@@ -1,0 +1,56 @@
+syntax="proto2";
+package player_service;
+
+option cc_generic_services = true;
+
+message PlayerPropertiesRequest {
+};
+
+message PlayerPropertiesResponse {
+    repeated string supported_file_types = 1;
+};
+
+message ResetRequest {
+};
+
+message ResetResponse {
+      required string error_message = 1;
+      required int32 error_code = 2;
+};
+
+message PushToPlaylistRequest {
+      required string file_type = 1;
+      required string original_path = 2;
+      required int32 push_to_index = 3;
+      required bytes file_data = 4;
+};
+
+message PushToPlaylistResponse {
+      required string error_message = 1;
+      required int32 error_code = 2;
+      optional int32 playlist_index = 3;
+};
+
+message PlaybackControlRequest {
+      enum ControlType {
+           PLAY = 0;
+           STOP = 1;
+           PAUSE = 2;
+           VOLUME = 3;
+      }
+      required ControlType corpus = 1;
+      optional int32 play_index = 2;
+      optional int32 volume_percent = 3;
+};
+
+message PlaybackControlResponse {
+      required string error_message = 1;
+      required int32 error_code = 2;
+};
+
+service PlayerService {
+      rpc PlayerProperties(PlayerPropertiesRequest) returns (PlayerPropertiesResponse);
+      rpc ResetPlaylist(ResetRequest) returns (ResetResponse);
+      rpc PushToPlaylist(PushToPlaylistRequest) returns (PushToPlaylistResponse);
+      rpc PlaybackControl(PlaybackControlRequest) returns (PlaybackControlResponse);
+};
