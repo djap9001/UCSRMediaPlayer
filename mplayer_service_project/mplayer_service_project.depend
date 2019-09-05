@@ -433,7 +433,7 @@
 	"butil/macros.h"
 	"bthread/types.h"
 
-1567241896 source:/home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/player_interface/player_service.pb.cc
+1567693167 source:/home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/player_interface/player_service.pb.cc
 	"player_service.pb.h"
 	<algorithm>
 	<google/protobuf/stubs/common.h>
@@ -446,7 +446,7 @@
 	<google/protobuf/wire_format.h>
 	"third_party/protobuf/version.h"
 
-1567241896 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/player_interface/player_service.pb.h
+1567693167 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/player_interface/player_service.pb.h
 	<string>
 	<google/protobuf/stubs/common.h>
 	<google/protobuf/io/coded_stream.h>
@@ -463,7 +463,7 @@
 	<google/protobuf/service.h>
 	<google/protobuf/unknown_field_set.h>
 
-1567243274 source:/home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/mplayer_service/src/mplayer_service.cpp
+1567691815 source:/home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/mplayer_service/src/mplayer_service.cpp
 	<butil/logging.h>
 	<brpc/server.h>
 	"mplayer_service.hpp"

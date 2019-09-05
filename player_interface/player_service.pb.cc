@@ -201,7 +201,11 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::player_service::PlayerPropertiesResponse, supported_file_types_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::player_service::PlayerPropertiesResponse, player_name_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::player_service::PlayerPropertiesResponse, player_description_),
   ~0u,
+  0,
+  1,
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::player_service::ResetRequest, _has_bits_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::player_service::ResetRequest, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -245,7 +249,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::player_service::PlaybackControlRequest, corpus_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::player_service::PlaybackControlRequest, control_type_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::player_service::PlaybackControlRequest, play_index_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::player_service::PlaybackControlRequest, volume_percent_),
   0,
@@ -263,13 +267,13 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
 };
 static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
   { 0, 5, sizeof(::player_service::PlayerPropertiesRequest)},
-  { 5, 11, sizeof(::player_service::PlayerPropertiesResponse)},
-  { 12, 17, sizeof(::player_service::ResetRequest)},
-  { 17, 24, sizeof(::player_service::ResetResponse)},
-  { 26, 35, sizeof(::player_service::PushToPlaylistRequest)},
-  { 39, 47, sizeof(::player_service::PushToPlaylistResponse)},
-  { 50, 58, sizeof(::player_service::PlaybackControlRequest)},
-  { 61, 68, sizeof(::player_service::PlaybackControlResponse)},
+  { 5, 13, sizeof(::player_service::PlayerPropertiesResponse)},
+  { 16, 21, sizeof(::player_service::ResetRequest)},
+  { 21, 28, sizeof(::player_service::ResetResponse)},
+  { 30, 39, sizeof(::player_service::PushToPlaylistRequest)},
+  { 43, 51, sizeof(::player_service::PushToPlaylistResponse)},
+  { 54, 62, sizeof(::player_service::PlaybackControlRequest)},
+  { 65, 72, sizeof(::player_service::PlaybackControlResponse)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -305,35 +309,37 @@ void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
       "\n\024player_service.proto\022\016player_service\"\031"
-      "\n\027PlayerPropertiesRequest\"8\n\030PlayerPrope"
+      "\n\027PlayerPropertiesRequest\"i\n\030PlayerPrope"
       "rtiesResponse\022\034\n\024supported_file_types\030\001 "
-      "\003(\t\"\016\n\014ResetRequest\":\n\rResetResponse\022\025\n\r"
-      "error_message\030\001 \002(\t\022\022\n\nerror_code\030\002 \002(\005\""
-      "k\n\025PushToPlaylistRequest\022\021\n\tfile_type\030\001 "
-      "\002(\t\022\025\n\roriginal_path\030\002 \002(\t\022\025\n\rpush_to_in"
-      "dex\030\003 \002(\005\022\021\n\tfile_data\030\004 \002(\014\"[\n\026PushToPl"
-      "aylistResponse\022\025\n\rerror_message\030\001 \002(\t\022\022\n"
-      "\nerror_code\030\002 \002(\005\022\026\n\016playlist_index\030\003 \001("
-      "\005\"\302\001\n\026PlaybackControlRequest\022B\n\006corpus\030\001"
-      " \002(\01622.player_service.PlaybackControlReq"
-      "uest.ControlType\022\022\n\nplay_index\030\002 \001(\005\022\026\n\016"
-      "volume_percent\030\003 \001(\005\"8\n\013ControlType\022\010\n\004P"
-      "LAY\020\000\022\010\n\004STOP\020\001\022\t\n\005PAUSE\020\002\022\n\n\006VOLUME\020\003\"D"
-      "\n\027PlaybackControlResponse\022\025\n\rerror_messa"
-      "ge\030\001 \002(\t\022\022\n\nerror_code\030\002 \002(\0052\211\003\n\rPlayerS"
-      "ervice\022e\n\020PlayerProperties\022\'.player_serv"
-      "ice.PlayerPropertiesRequest\032(.player_ser"
-      "vice.PlayerPropertiesResponse\022L\n\rResetPl"
-      "aylist\022\034.player_service.ResetRequest\032\035.p"
-      "layer_service.ResetResponse\022_\n\016PushToPla"
-      "ylist\022%.player_service.PushToPlaylistReq"
-      "uest\032&.player_service.PushToPlaylistResp"
-      "onse\022b\n\017PlaybackControl\022&.player_service"
-      ".PlaybackControlRequest\032\'.player_service"
-      ".PlaybackControlResponseB\003\200\001\001"
+      "\003(\t\022\023\n\013player_name\030\002 \002(\t\022\032\n\022player_descr"
+      "iption\030\003 \002(\t\"\016\n\014ResetRequest\":\n\rResetRes"
+      "ponse\022\025\n\rerror_message\030\001 \002(\t\022\022\n\nerror_co"
+      "de\030\002 \002(\005\"k\n\025PushToPlaylistRequest\022\021\n\tfil"
+      "e_type\030\001 \002(\t\022\025\n\roriginal_path\030\002 \002(\t\022\025\n\rp"
+      "ush_to_index\030\003 \002(\005\022\021\n\tfile_data\030\004 \002(\014\"[\n"
+      "\026PushToPlaylistResponse\022\025\n\rerror_message"
+      "\030\001 \002(\t\022\022\n\nerror_code\030\002 \002(\005\022\026\n\016playlist_i"
+      "ndex\030\003 \001(\005\"\310\001\n\026PlaybackControlRequest\022H\n"
+      "\014control_type\030\001 \002(\01622.player_service.Pla"
+      "ybackControlRequest.ControlType\022\022\n\nplay_"
+      "index\030\002 \001(\005\022\026\n\016volume_percent\030\003 \001(\005\"8\n\013C"
+      "ontrolType\022\010\n\004PLAY\020\000\022\010\n\004STOP\020\001\022\t\n\005PAUSE\020"
+      "\002\022\n\n\006VOLUME\020\003\"D\n\027PlaybackControlResponse"
+      "\022\025\n\rerror_message\030\001 \002(\t\022\022\n\nerror_code\030\002 "
+      "\002(\0052\211\003\n\rPlayerService\022e\n\020PlayerPropertie"
+      "s\022\'.player_service.PlayerPropertiesReque"
+      "st\032(.player_service.PlayerPropertiesResp"
+      "onse\022L\n\rResetPlaylist\022\034.player_service.R"
+      "esetRequest\032\035.player_service.ResetRespon"
+      "se\022_\n\016PushToPlaylist\022%.player_service.Pu"
+      "shToPlaylistRequest\032&.player_service.Pus"
+      "hToPlaylistResponse\022b\n\017PlaybackControl\022&"
+      ".player_service.PlaybackControlRequest\032\'"
+      ".player_service.PlaybackControlResponseB"
+      "\003\200\001\001"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 1069);
+      descriptor, 1124);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "player_service.proto", &protobuf_RegisterTypes);
 }
@@ -564,6 +570,8 @@ void PlayerPropertiesResponse::InitAsDefaultInstance() {
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int PlayerPropertiesResponse::kSupportedFileTypesFieldNumber;
+const int PlayerPropertiesResponse::kPlayerNameFieldNumber;
+const int PlayerPropertiesResponse::kPlayerDescriptionFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 PlayerPropertiesResponse::PlayerPropertiesResponse()
@@ -579,10 +587,20 @@ PlayerPropertiesResponse::PlayerPropertiesResponse(const PlayerPropertiesRespons
       _has_bits_(from._has_bits_),
       supported_file_types_(from.supported_file_types_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
+  player_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.has_player_name()) {
+    player_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.player_name_);
+  }
+  player_description_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.has_player_description()) {
+    player_description_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.player_description_);
+  }
   // @@protoc_insertion_point(copy_constructor:player_service.PlayerPropertiesResponse)
 }
 
 void PlayerPropertiesResponse::SharedCtor() {
+  player_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  player_description_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 PlayerPropertiesResponse::~PlayerPropertiesResponse() {
@@ -591,6 +609,8 @@ PlayerPropertiesResponse::~PlayerPropertiesResponse() {
 }
 
 void PlayerPropertiesResponse::SharedDtor() {
+  player_name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  player_description_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 void PlayerPropertiesResponse::SetCachedSize(int size) const {
@@ -614,6 +634,15 @@ void PlayerPropertiesResponse::Clear() {
   (void) cached_has_bits;
 
   supported_file_types_.Clear();
+  cached_has_bits = _has_bits_[0];
+  if (cached_has_bits & 3u) {
+    if (cached_has_bits & 0x00000001u) {
+      player_name_.ClearNonDefaultToEmptyNoArena();
+    }
+    if (cached_has_bits & 0x00000002u) {
+      player_description_.ClearNonDefaultToEmptyNoArena();
+    }
+  }
   _has_bits_.Clear();
   _internal_metadata_.Clear();
 }
@@ -639,6 +668,38 @@ bool PlayerPropertiesResponse::MergePartialFromCodedStream(
             static_cast<int>(this->supported_file_types(this->supported_file_types_size() - 1).length()),
             ::google::protobuf::internal::WireFormat::PARSE,
             "player_service.PlayerPropertiesResponse.supported_file_types");
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // required string player_name = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_player_name()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->player_name().data(), static_cast<int>(this->player_name().length()),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "player_service.PlayerPropertiesResponse.player_name");
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // required string player_description = 3;
+      case 3: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_player_description()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->player_description().data(), static_cast<int>(this->player_description().length()),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "player_service.PlayerPropertiesResponse.player_description");
         } else {
           goto handle_unusual;
         }
@@ -681,6 +742,27 @@ void PlayerPropertiesResponse::SerializeWithCachedSizes(
       1, this->supported_file_types(i), output);
   }
 
+  cached_has_bits = _has_bits_[0];
+  // required string player_name = 2;
+  if (cached_has_bits & 0x00000001u) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->player_name().data(), static_cast<int>(this->player_name().length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "player_service.PlayerPropertiesResponse.player_name");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      2, this->player_name(), output);
+  }
+
+  // required string player_description = 3;
+  if (cached_has_bits & 0x00000002u) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->player_description().data(), static_cast<int>(this->player_description().length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "player_service.PlayerPropertiesResponse.player_description");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      3, this->player_description(), output);
+  }
+
   if (_internal_metadata_.have_unknown_fields()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         _internal_metadata_.unknown_fields(), output);
@@ -705,6 +787,29 @@ void PlayerPropertiesResponse::SerializeWithCachedSizes(
       WriteStringToArray(1, this->supported_file_types(i), target);
   }
 
+  cached_has_bits = _has_bits_[0];
+  // required string player_name = 2;
+  if (cached_has_bits & 0x00000001u) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->player_name().data(), static_cast<int>(this->player_name().length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "player_service.PlayerPropertiesResponse.player_name");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        2, this->player_name(), target);
+  }
+
+  // required string player_description = 3;
+  if (cached_has_bits & 0x00000002u) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->player_description().data(), static_cast<int>(this->player_description().length()),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "player_service.PlayerPropertiesResponse.player_description");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        3, this->player_description(), target);
+  }
+
   if (_internal_metadata_.have_unknown_fields()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields(), target);
@@ -713,6 +818,26 @@ void PlayerPropertiesResponse::SerializeWithCachedSizes(
   return target;
 }
 
+size_t PlayerPropertiesResponse::RequiredFieldsByteSizeFallback() const {
+// @@protoc_insertion_point(required_fields_byte_size_fallback_start:player_service.PlayerPropertiesResponse)
+  size_t total_size = 0;
+
+  if (has_player_name()) {
+    // required string player_name = 2;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->player_name());
+  }
+
+  if (has_player_description()) {
+    // required string player_description = 3;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->player_description());
+  }
+
+  return total_size;
+}
 size_t PlayerPropertiesResponse::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:player_service.PlayerPropertiesResponse)
   size_t total_size = 0;
@@ -721,6 +846,20 @@ size_t PlayerPropertiesResponse::ByteSizeLong() const {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         _internal_metadata_.unknown_fields());
+  }
+  if (((_has_bits_[0] & 0x00000003) ^ 0x00000003) == 0) {  // All required fields are present.
+    // required string player_name = 2;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->player_name());
+
+    // required string player_description = 3;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->player_description());
+
+  } else {
+    total_size += RequiredFieldsByteSizeFallback();
   }
   // repeated string supported_file_types = 1;
   total_size += 1 *
@@ -758,6 +897,17 @@ void PlayerPropertiesResponse::MergeFrom(const PlayerPropertiesResponse& from) {
   (void) cached_has_bits;
 
   supported_file_types_.MergeFrom(from.supported_file_types_);
+  cached_has_bits = from._has_bits_[0];
+  if (cached_has_bits & 3u) {
+    if (cached_has_bits & 0x00000001u) {
+      set_has_player_name();
+      player_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.player_name_);
+    }
+    if (cached_has_bits & 0x00000002u) {
+      set_has_player_description();
+      player_description_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.player_description_);
+    }
+  }
 }
 
 void PlayerPropertiesResponse::CopyFrom(const ::google::protobuf::Message& from) {
@@ -775,6 +925,7 @@ void PlayerPropertiesResponse::CopyFrom(const PlayerPropertiesResponse& from) {
 }
 
 bool PlayerPropertiesResponse::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
   return true;
 }
 
@@ -785,6 +936,10 @@ void PlayerPropertiesResponse::Swap(PlayerPropertiesResponse* other) {
 void PlayerPropertiesResponse::InternalSwap(PlayerPropertiesResponse* other) {
   using std::swap;
   supported_file_types_.InternalSwap(CastToBase(&other->supported_file_types_));
+  player_name_.Swap(&other->player_name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  player_description_.Swap(&other->player_description_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
   swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
 }
@@ -2088,7 +2243,7 @@ void PushToPlaylistResponse::InternalSwap(PushToPlaylistResponse* other) {
 void PlaybackControlRequest::InitAsDefaultInstance() {
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int PlaybackControlRequest::kCorpusFieldNumber;
+const int PlaybackControlRequest::kControlTypeFieldNumber;
 const int PlaybackControlRequest::kPlayIndexFieldNumber;
 const int PlaybackControlRequest::kVolumePercentFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
@@ -2105,16 +2260,16 @@ PlaybackControlRequest::PlaybackControlRequest(const PlaybackControlRequest& fro
       _internal_metadata_(NULL),
       _has_bits_(from._has_bits_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::memcpy(&corpus_, &from.corpus_,
+  ::memcpy(&control_type_, &from.control_type_,
     static_cast<size_t>(reinterpret_cast<char*>(&volume_percent_) -
-    reinterpret_cast<char*>(&corpus_)) + sizeof(volume_percent_));
+    reinterpret_cast<char*>(&control_type_)) + sizeof(volume_percent_));
   // @@protoc_insertion_point(copy_constructor:player_service.PlaybackControlRequest)
 }
 
 void PlaybackControlRequest::SharedCtor() {
-  ::memset(&corpus_, 0, static_cast<size_t>(
+  ::memset(&control_type_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&volume_percent_) -
-      reinterpret_cast<char*>(&corpus_)) + sizeof(volume_percent_));
+      reinterpret_cast<char*>(&control_type_)) + sizeof(volume_percent_));
 }
 
 PlaybackControlRequest::~PlaybackControlRequest() {
@@ -2147,9 +2302,9 @@ void PlaybackControlRequest::Clear() {
 
   cached_has_bits = _has_bits_[0];
   if (cached_has_bits & 7u) {
-    ::memset(&corpus_, 0, static_cast<size_t>(
+    ::memset(&control_type_, 0, static_cast<size_t>(
         reinterpret_cast<char*>(&volume_percent_) -
-        reinterpret_cast<char*>(&corpus_)) + sizeof(volume_percent_));
+        reinterpret_cast<char*>(&control_type_)) + sizeof(volume_percent_));
   }
   _has_bits_.Clear();
   _internal_metadata_.Clear();
@@ -2165,7 +2320,7 @@ bool PlaybackControlRequest::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .player_service.PlaybackControlRequest.ControlType corpus = 1;
+      // required .player_service.PlaybackControlRequest.ControlType control_type = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
@@ -2174,7 +2329,7 @@ bool PlaybackControlRequest::MergePartialFromCodedStream(
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
           if (::player_service::PlaybackControlRequest_ControlType_IsValid(value)) {
-            set_corpus(static_cast< ::player_service::PlaybackControlRequest_ControlType >(value));
+            set_control_type(static_cast< ::player_service::PlaybackControlRequest_ControlType >(value));
           } else {
             mutable_unknown_fields()->AddVarint(
                 1, static_cast< ::google::protobuf::uint64>(value));
@@ -2240,10 +2395,10 @@ void PlaybackControlRequest::SerializeWithCachedSizes(
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  // required .player_service.PlaybackControlRequest.ControlType corpus = 1;
+  // required .player_service.PlaybackControlRequest.ControlType control_type = 1;
   if (cached_has_bits & 0x00000001u) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
-      1, this->corpus(), output);
+      1, this->control_type(), output);
   }
 
   // optional int32 play_index = 2;
@@ -2271,10 +2426,10 @@ void PlaybackControlRequest::SerializeWithCachedSizes(
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  // required .player_service.PlaybackControlRequest.ControlType corpus = 1;
+  // required .player_service.PlaybackControlRequest.ControlType control_type = 1;
   if (cached_has_bits & 0x00000001u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
-      1, this->corpus(), target);
+      1, this->control_type(), target);
   }
 
   // optional int32 play_index = 2;
@@ -2304,10 +2459,10 @@ size_t PlaybackControlRequest::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         _internal_metadata_.unknown_fields());
   }
-  // required .player_service.PlaybackControlRequest.ControlType corpus = 1;
-  if (has_corpus()) {
+  // required .player_service.PlaybackControlRequest.ControlType control_type = 1;
+  if (has_control_type()) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::EnumSize(this->corpus());
+      ::google::protobuf::internal::WireFormatLite::EnumSize(this->control_type());
   }
   if (_has_bits_[0 / 32] & 6u) {
     // optional int32 play_index = 2;
@@ -2355,7 +2510,7 @@ void PlaybackControlRequest::MergeFrom(const PlaybackControlRequest& from) {
   cached_has_bits = from._has_bits_[0];
   if (cached_has_bits & 7u) {
     if (cached_has_bits & 0x00000001u) {
-      corpus_ = from.corpus_;
+      control_type_ = from.control_type_;
     }
     if (cached_has_bits & 0x00000002u) {
       play_index_ = from.play_index_;
@@ -2392,7 +2547,7 @@ void PlaybackControlRequest::Swap(PlaybackControlRequest* other) {
 }
 void PlaybackControlRequest::InternalSwap(PlaybackControlRequest* other) {
   using std::swap;
-  swap(corpus_, other->corpus_);
+  swap(control_type_, other->control_type_);
   swap(play_index_, other->play_index_);
   swap(volume_percent_, other->volume_percent_);
   swap(_has_bits_[0], other->_has_bits_[0]);

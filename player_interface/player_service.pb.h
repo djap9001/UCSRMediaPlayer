@@ -330,13 +330,52 @@ class PlayerPropertiesResponse : public ::google::protobuf::Message /* @@protoc_
   const ::google::protobuf::RepeatedPtrField< ::std::string>& supported_file_types() const;
   ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_supported_file_types();
 
+  // required string player_name = 2;
+  bool has_player_name() const;
+  void clear_player_name();
+  static const int kPlayerNameFieldNumber = 2;
+  const ::std::string& player_name() const;
+  void set_player_name(const ::std::string& value);
+  #if LANG_CXX11
+  void set_player_name(::std::string&& value);
+  #endif
+  void set_player_name(const char* value);
+  void set_player_name(const char* value, size_t size);
+  ::std::string* mutable_player_name();
+  ::std::string* release_player_name();
+  void set_allocated_player_name(::std::string* player_name);
+
+  // required string player_description = 3;
+  bool has_player_description() const;
+  void clear_player_description();
+  static const int kPlayerDescriptionFieldNumber = 3;
+  const ::std::string& player_description() const;
+  void set_player_description(const ::std::string& value);
+  #if LANG_CXX11
+  void set_player_description(::std::string&& value);
+  #endif
+  void set_player_description(const char* value);
+  void set_player_description(const char* value, size_t size);
+  ::std::string* mutable_player_description();
+  ::std::string* release_player_description();
+  void set_allocated_player_description(::std::string* player_description);
+
   // @@protoc_insertion_point(class_scope:player_service.PlayerPropertiesResponse)
  private:
+  void set_has_player_name();
+  void clear_has_player_name();
+  void set_has_player_description();
+  void clear_has_player_description();
+
+  // helper for ByteSizeLong()
+  size_t RequiredFieldsByteSizeFallback() const;
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   ::google::protobuf::RepeatedPtrField< ::std::string> supported_file_types_;
+  ::google::protobuf::internal::ArenaStringPtr player_name_;
+  ::google::protobuf::internal::ArenaStringPtr player_description_;
   friend struct ::protobuf_player_5fservice_2eproto::TableStruct;
 };
 // -------------------------------------------------------------------
@@ -1020,12 +1059,12 @@ class PlaybackControlRequest : public ::google::protobuf::Message /* @@protoc_in
 
   // accessors -------------------------------------------------------
 
-  // required .player_service.PlaybackControlRequest.ControlType corpus = 1;
-  bool has_corpus() const;
-  void clear_corpus();
-  static const int kCorpusFieldNumber = 1;
-  ::player_service::PlaybackControlRequest_ControlType corpus() const;
-  void set_corpus(::player_service::PlaybackControlRequest_ControlType value);
+  // required .player_service.PlaybackControlRequest.ControlType control_type = 1;
+  bool has_control_type() const;
+  void clear_control_type();
+  static const int kControlTypeFieldNumber = 1;
+  ::player_service::PlaybackControlRequest_ControlType control_type() const;
+  void set_control_type(::player_service::PlaybackControlRequest_ControlType value);
 
   // optional int32 play_index = 2;
   bool has_play_index() const;
@@ -1043,8 +1082,8 @@ class PlaybackControlRequest : public ::google::protobuf::Message /* @@protoc_in
 
   // @@protoc_insertion_point(class_scope:player_service.PlaybackControlRequest)
  private:
-  void set_has_corpus();
-  void clear_has_corpus();
+  void set_has_control_type();
+  void clear_has_control_type();
   void set_has_play_index();
   void clear_has_play_index();
   void set_has_volume_percent();
@@ -1053,7 +1092,7 @@ class PlaybackControlRequest : public ::google::protobuf::Message /* @@protoc_in
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
-  int corpus_;
+  int control_type_;
   ::google::protobuf::int32 play_index_;
   ::google::protobuf::int32 volume_percent_;
   friend struct ::protobuf_player_5fservice_2eproto::TableStruct;
@@ -1358,6 +1397,138 @@ inline ::google::protobuf::RepeatedPtrField< ::std::string>*
 PlayerPropertiesResponse::mutable_supported_file_types() {
   // @@protoc_insertion_point(field_mutable_list:player_service.PlayerPropertiesResponse.supported_file_types)
   return &supported_file_types_;
+}
+
+// required string player_name = 2;
+inline bool PlayerPropertiesResponse::has_player_name() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void PlayerPropertiesResponse::set_has_player_name() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void PlayerPropertiesResponse::clear_has_player_name() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void PlayerPropertiesResponse::clear_player_name() {
+  player_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_player_name();
+}
+inline const ::std::string& PlayerPropertiesResponse::player_name() const {
+  // @@protoc_insertion_point(field_get:player_service.PlayerPropertiesResponse.player_name)
+  return player_name_.GetNoArena();
+}
+inline void PlayerPropertiesResponse::set_player_name(const ::std::string& value) {
+  set_has_player_name();
+  player_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:player_service.PlayerPropertiesResponse.player_name)
+}
+#if LANG_CXX11
+inline void PlayerPropertiesResponse::set_player_name(::std::string&& value) {
+  set_has_player_name();
+  player_name_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:player_service.PlayerPropertiesResponse.player_name)
+}
+#endif
+inline void PlayerPropertiesResponse::set_player_name(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  set_has_player_name();
+  player_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:player_service.PlayerPropertiesResponse.player_name)
+}
+inline void PlayerPropertiesResponse::set_player_name(const char* value, size_t size) {
+  set_has_player_name();
+  player_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:player_service.PlayerPropertiesResponse.player_name)
+}
+inline ::std::string* PlayerPropertiesResponse::mutable_player_name() {
+  set_has_player_name();
+  // @@protoc_insertion_point(field_mutable:player_service.PlayerPropertiesResponse.player_name)
+  return player_name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* PlayerPropertiesResponse::release_player_name() {
+  // @@protoc_insertion_point(field_release:player_service.PlayerPropertiesResponse.player_name)
+  if (!has_player_name()) {
+    return NULL;
+  }
+  clear_has_player_name();
+  return player_name_.ReleaseNonDefaultNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void PlayerPropertiesResponse::set_allocated_player_name(::std::string* player_name) {
+  if (player_name != NULL) {
+    set_has_player_name();
+  } else {
+    clear_has_player_name();
+  }
+  player_name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), player_name);
+  // @@protoc_insertion_point(field_set_allocated:player_service.PlayerPropertiesResponse.player_name)
+}
+
+// required string player_description = 3;
+inline bool PlayerPropertiesResponse::has_player_description() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void PlayerPropertiesResponse::set_has_player_description() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void PlayerPropertiesResponse::clear_has_player_description() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void PlayerPropertiesResponse::clear_player_description() {
+  player_description_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_player_description();
+}
+inline const ::std::string& PlayerPropertiesResponse::player_description() const {
+  // @@protoc_insertion_point(field_get:player_service.PlayerPropertiesResponse.player_description)
+  return player_description_.GetNoArena();
+}
+inline void PlayerPropertiesResponse::set_player_description(const ::std::string& value) {
+  set_has_player_description();
+  player_description_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:player_service.PlayerPropertiesResponse.player_description)
+}
+#if LANG_CXX11
+inline void PlayerPropertiesResponse::set_player_description(::std::string&& value) {
+  set_has_player_description();
+  player_description_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:player_service.PlayerPropertiesResponse.player_description)
+}
+#endif
+inline void PlayerPropertiesResponse::set_player_description(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  set_has_player_description();
+  player_description_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:player_service.PlayerPropertiesResponse.player_description)
+}
+inline void PlayerPropertiesResponse::set_player_description(const char* value, size_t size) {
+  set_has_player_description();
+  player_description_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:player_service.PlayerPropertiesResponse.player_description)
+}
+inline ::std::string* PlayerPropertiesResponse::mutable_player_description() {
+  set_has_player_description();
+  // @@protoc_insertion_point(field_mutable:player_service.PlayerPropertiesResponse.player_description)
+  return player_description_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* PlayerPropertiesResponse::release_player_description() {
+  // @@protoc_insertion_point(field_release:player_service.PlayerPropertiesResponse.player_description)
+  if (!has_player_description()) {
+    return NULL;
+  }
+  clear_has_player_description();
+  return player_description_.ReleaseNonDefaultNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void PlayerPropertiesResponse::set_allocated_player_description(::std::string* player_description) {
+  if (player_description != NULL) {
+    set_has_player_description();
+  } else {
+    clear_has_player_description();
+  }
+  player_description_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), player_description);
+  // @@protoc_insertion_point(field_set_allocated:player_service.PlayerPropertiesResponse.player_description)
 }
 
 // -------------------------------------------------------------------
@@ -1806,29 +1977,29 @@ inline void PushToPlaylistResponse::set_playlist_index(::google::protobuf::int32
 
 // PlaybackControlRequest
 
-// required .player_service.PlaybackControlRequest.ControlType corpus = 1;
-inline bool PlaybackControlRequest::has_corpus() const {
+// required .player_service.PlaybackControlRequest.ControlType control_type = 1;
+inline bool PlaybackControlRequest::has_control_type() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void PlaybackControlRequest::set_has_corpus() {
+inline void PlaybackControlRequest::set_has_control_type() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void PlaybackControlRequest::clear_has_corpus() {
+inline void PlaybackControlRequest::clear_has_control_type() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void PlaybackControlRequest::clear_corpus() {
-  corpus_ = 0;
-  clear_has_corpus();
+inline void PlaybackControlRequest::clear_control_type() {
+  control_type_ = 0;
+  clear_has_control_type();
 }
-inline ::player_service::PlaybackControlRequest_ControlType PlaybackControlRequest::corpus() const {
-  // @@protoc_insertion_point(field_get:player_service.PlaybackControlRequest.corpus)
-  return static_cast< ::player_service::PlaybackControlRequest_ControlType >(corpus_);
+inline ::player_service::PlaybackControlRequest_ControlType PlaybackControlRequest::control_type() const {
+  // @@protoc_insertion_point(field_get:player_service.PlaybackControlRequest.control_type)
+  return static_cast< ::player_service::PlaybackControlRequest_ControlType >(control_type_);
 }
-inline void PlaybackControlRequest::set_corpus(::player_service::PlaybackControlRequest_ControlType value) {
+inline void PlaybackControlRequest::set_control_type(::player_service::PlaybackControlRequest_ControlType value) {
   assert(::player_service::PlaybackControlRequest_ControlType_IsValid(value));
-  set_has_corpus();
-  corpus_ = value;
-  // @@protoc_insertion_point(field_set:player_service.PlaybackControlRequest.corpus)
+  set_has_control_type();
+  control_type_ = value;
+  // @@protoc_insertion_point(field_set:player_service.PlaybackControlRequest.control_type)
 }
 
 // optional int32 play_index = 2;

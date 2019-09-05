@@ -8,6 +8,8 @@ message PlayerPropertiesRequest {
 
 message PlayerPropertiesResponse {
     repeated string supported_file_types = 1;
+    required string player_name = 2;
+    required string player_description = 3;
 };
 
 message ResetRequest {
@@ -38,7 +40,7 @@ message PlaybackControlRequest {
            PAUSE = 2;
            VOLUME = 3;
       }
-      required ControlType corpus = 1;
+      required ControlType control_type = 1;
       optional int32 play_index = 2;
       optional int32 volume_percent = 3;
 };
