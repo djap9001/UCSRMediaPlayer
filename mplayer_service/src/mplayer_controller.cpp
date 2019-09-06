@@ -20,14 +20,43 @@
 namespace player_service {
 
 MPlayerController::MPlayerController() {
-
+    init_mplayer_process();
 }
 
 MPlayerController::~MPlayerController() {
 }
 
 void MPlayerController::init_mplayer_process() {
+    int controller_to_mplayer[2];
+    int mplayer_to_controller[2];
 
+    pipe(controller_to_mplayer);
+    pipe(mplayer_to_controller);
+
+    int mplayerPID = fork();
+
+    if (mplayerPID == 0) {
+        //this is child, make it mplayer...
+        close(controller_to_mplayer[1]);    //Close the writing end of the incoming pipe
+        close(mplayer_to_controller[0]);    //Close the reading end of the outgoing pipe
+
+        dup2(controller_to_mplayer[0], STDIN_FILENO);   //replace stdin with incoming pipe
+        dup2(mplayer_to_controller[1], STDOUT_FILENO);  //replace stdout with outgoing pipe
+
+        //exec mplayer process
+        char filename[] = "/usr/bin/mplayer";
+        char *newargv[] = {"mplayer", "-slave", "-idle", "-quiet", NULL};
+        char *newenviron[] = { NULL };
+        execve(filename, newargv, newenviron);
+    } else {
+        //this is parent, keep as mplayer control server...
+        close(mplayer_to_controller[0]);    //Close the reading end of the outgoing pipe.
+        close(controller_to_mplayer[1]);    //Close the writing side of the incoming pipe.
+
+        // store the remaining file descriptors for later use.
+        _mplayer_process_write_fd = mplayer_to_controller[1];
+        _mplayer_process_read_fd = controller_to_mplayer[0];
+    }
 }
 
 int MPlayerController::set_file(const std::string& file_path) {
