@@ -36,7 +36,6 @@
 			<Add directory="../player_interface" />
 		</Compiler>
 		<Linker>
-			<Add library="pthread" />
 			<Add library="../third_party/brpc/lib/libbrpc.a" />
 			<Add library="../third_party/brpc/lib/libgflags.a" />
 			<Add library="../third_party/brpc/lib/libprotobuf.a" />
@@ -45,6 +44,7 @@
 			<Add library="dl" />
 			<Add library="../third_party/brpc/lib/libleveldb.a" />
 			<Add library="z" />
+			<Add library="pthread" />
 		</Linker>
 		<Unit filename="../djap_utils/include/Exception.hpp" />
 		<Unit filename="../djap_utils/include/condition_mutex.hpp" />

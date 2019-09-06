@@ -43,7 +43,6 @@
 			<Add directory="../mplayer_service/include" />
 		</Compiler>
 		<Linker>
-			<Add library="pthread" />
 			<Add library="../third_party/brpc/lib/libbrpc.a" />
 			<Add library="../third_party/brpc/lib/libgflags.a" />
 			<Add library="../third_party/brpc/lib/libprotobuf.a" />
@@ -52,6 +51,7 @@
 			<Add library="dl" />
 			<Add library="../third_party/brpc/lib/libleveldb.a" />
 			<Add library="z" />
+			<Add library="pthread" />
 		</Linker>
 		<Unit filename="../djap_utils/include/Exception.hpp" />
 		<Unit filename="../djap_utils/include/condition_mutex.hpp" />
@@ -59,6 +59,7 @@
 		<Unit filename="../djap_utils/include/mutex_guard.hpp" />
 		<Unit filename="../djap_utils/include/shared_pointer.hpp" />
 		<Unit filename="../djap_utils/include/shared_pointer_base.hpp" />
+		<Unit filename="../djap_utils/include/singleton.hpp" />
 		<Unit filename="../djap_utils/include/thread.hpp" />
 		<Unit filename="../djap_utils/include/weak_pointer.hpp" />
 		<Unit filename="../djap_utils/src/Exception.cpp" />
@@ -67,8 +68,10 @@
 		<Unit filename="../djap_utils/src/mutex_guard.cpp" />
 		<Unit filename="../djap_utils/src/shared_pointer_base.cpp" />
 		<Unit filename="../djap_utils/src/thread.cpp" />
+		<Unit filename="../mplayer_service/include/mplayer_controller.hpp" />
 		<Unit filename="../mplayer_service/include/mplayer_service.hpp" />
 		<Unit filename="../mplayer_service/src/main.cpp" />
+		<Unit filename="../mplayer_service/src/mplayer_controller.cpp" />
 		<Unit filename="../mplayer_service/src/mplayer_service.cpp" />
 		<Unit filename="../player_interface/player_service.pb.cc" />
 		<Unit filename="../player_interface/player_service.pb.h" />

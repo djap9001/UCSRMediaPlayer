@@ -827,3 +827,821 @@
 1567242760 /home/pi/UCSRMediaPlayer2/UCSRMediaPlayer/mplayer_service/include/mplayer_service.hpp
 	"player_service.pb.h"
 
+1567712056 source:/home/djap/player_project/UCSRMediaPlayer/djap_utils/src/condition_mutex.cpp
+	"djap_utils/include/condition_mutex.hpp"
+
+1567712056 /home/djap/player_project/UCSRMediaPlayer//djap_utils/include/condition_mutex.hpp
+	"djap_utils/include/mutex.hpp"
+
+1567712056 /home/djap/player_project/UCSRMediaPlayer//djap_utils/include/mutex.hpp
+	"bthread/bthread.h"
+	<pthread.h>
+	"djap_utils/include/Exception.hpp"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/bthread/bthread.h
+	<pthread.h>
+	<sys/socket.h>
+	"bthread/types.h"
+	"bthread/errno.h"
+	<iostream>
+	"bthread/mutex.h"
+	"bthread/id.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/bthread/types.h
+	<stdint.h>
+	"butil/logging.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/logging.h
+	"butil/config.h"
+	<inttypes.h>
+	<string>
+	<cstring>
+	<sstream>
+	"butil/macros.h"
+	"butil/atomicops.h"
+	"butil/time.h"
+	<glog/logging.h>
+	<glog/raw_logging.h>
+	<com_log.h>
+	<inttypes.h>
+	<gflags/gflags_declare.h>
+	"butil/base_export.h"
+	"butil/basictypes.h"
+	"butil/debug/debugger.h"
+	"butil/strings/string_piece.h"
+	"butil/build_config.h"
+	"butil/synchronization/lock.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/config.h
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/macros.h
+	<stddef.h>
+	<string.h>
+	"butil/compiler_specific.h"
+	<boost/typeof/typeof.hpp>
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/compiler_specific.h
+	"butil/build_config.h"
+	<sanitizer/msan_interface.h>
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/build_config.h
+	<TargetConditionals.h>
+	<unistd.h>
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/atomicops.h
+	<stdint.h>
+	"butil/build_config.h"
+	"butil/macros.h"
+	"butil/atomicops_internals_tsan.h"
+	"butil/atomicops_internals_x86_msvc.h"
+	"butil/atomicops_internals_mac.h"
+	"butil/atomicops_internals_gcc.h"
+	"butil/atomicops_internals_arm_gcc.h"
+	"butil/atomicops_internals_arm64_gcc.h"
+	"butil/atomicops_internals_x86_gcc.h"
+	"butil/atomicops_internals_mips_gcc.h"
+	"butil/atomicops_internals_atomicword_compat.h"
+	<atomic>
+	<atomic>
+	<cstdatomic>
+	<boost/atomic.hpp>
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/atomicops_internals_tsan.h
+	<sanitizer/tsan_interface_atomic.h>
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/atomicops_internals_x86_msvc.h
+	<windows.h>
+	<intrin.h>
+	"butil/macros.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/atomicops_internals_mac.h
+	<libkern/OSAtomic.h>
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/atomicops_internals_gcc.h
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/atomicops_internals_arm_gcc.h
+	<sys/cpuinline.h>
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/atomicops_internals_arm64_gcc.h
+	<sys/cpuinline.h>
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/atomicops_internals_x86_gcc.h
+	"butil/base_export.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/base_export.h
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/atomicops_internals_mips_gcc.h
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/atomicops_internals_atomicword_compat.h
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/time.h
+	<time.h>
+	<sys/time.h>
+	<stdint.h>
+	<mach/mach.h>
+
+1567782070 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/gflags/gflags_declare.h
+	<string>
+	<stdint.h>
+	<sys/types.h>
+	<inttypes.h>
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/basictypes.h
+	<limits.h>
+	<stddef.h>
+	<stdint.h>
+	"butil/macros.h"
+	"butil/port.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/port.h
+	<stdarg.h>
+	"butil/build_config.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/debug/debugger.h
+	"butil/base_export.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/strings/string_piece.h
+	<stddef.h>
+	<iosfwd>
+	<string>
+	"butil/base_export.h"
+	"butil/basictypes.h"
+	"butil/containers/hash_tables.h"
+	"butil/strings/string16.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/containers/hash_tables.h
+	<utility>
+	"butil/basictypes.h"
+	"butil/strings/string16.h"
+	"butil/build_config.h"
+	<hash_map>
+	<hash_set>
+	<hash_map>
+	<hash_set>
+	<ext/hash_map>
+	<ext/hash_set>
+	<string>
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/strings/string16.h
+	<stdio.h>
+	<string>
+	"butil/base_export.h"
+	"butil/basictypes.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/synchronization/lock.h
+	"butil/build_config.h"
+	<windows.h>
+	<pthread.h>
+	"butil/base_export.h"
+	"butil/macros.h"
+	"butil/compat.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/compat.h
+	"butil/build_config.h"
+	<pthread.h>
+	<sys/cdefs.h>
+	<stdint.h>
+	<dispatch/dispatch.h>
+	<errno.h>
+	<sys/epoll.h>
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/bthread/errno.h
+	<errno.h>
+	"butil/errno.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/errno.h
+	<errno.h>
+	"butil/macros.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/bthread/mutex.h
+	"bthread/types.h"
+	"butil/scoped_lock.h"
+	"bvar/utils/lock_timer.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/scoped_lock.h
+	"butil/build_config.h"
+	<mutex>
+	"butil/synchronization/lock.h"
+	"butil/macros.h"
+	"butil/logging.h"
+	"butil/errno.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/bvar/utils/lock_timer.h
+	"butil/time.h"
+	"butil/scoped_lock.h"
+	"butil/macros.h"
+	"bvar/recorder.h"
+	"bvar/latency_recorder.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/bvar/recorder.h
+	<stdint.h>
+	"butil/macros.h"
+	"butil/logging.h"
+	"bvar/detail/combiner.h"
+	"bvar/variable.h"
+	"bvar/window.h"
+	"bvar/detail/sampler.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/bvar/detail/combiner.h
+	<string>
+	<vector>
+	"butil/atomicops.h"
+	"butil/scoped_lock.h"
+	"butil/type_traits.h"
+	"butil/synchronization/lock.h"
+	"butil/containers/linked_list.h"
+	"bvar/detail/agent_group.h"
+	"bvar/detail/is_atomical.h"
+	"bvar/detail/call_op_returning_void.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/type_traits.h
+	<cstddef>
+	"butil/build_config.h"
+	<type_traits>
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/containers/linked_list.h
+	"butil/macros.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/bvar/detail/agent_group.h
+	<pthread.h>
+	<stdlib.h>
+	<new>
+	<deque>
+	<vector>
+	"butil/errno.h"
+	"butil/thread_local.h"
+	"butil/macros.h"
+	"butil/scoped_lock.h"
+	"butil/logging.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/thread_local.h
+	<new>
+	<cstddef>
+	"butil/macros.h"
+	"thread_local_inl.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/thread_local_inl.h
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/bvar/detail/is_atomical.h
+	"butil/type_traits.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/bvar/detail/call_op_returning_void.h
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/bvar/variable.h
+	<ostream>
+	<string>
+	<vector>
+	<gflags/gflags_declare.h>
+	"butil/macros.h"
+	"butil/strings/string_piece.h"
+	<boost/any.hpp>
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/bvar/window.h
+	<limits>
+	<math.h>
+	<gflags/gflags_declare.h>
+	"butil/logging.h"
+	"bvar/detail/sampler.h"
+	"bvar/detail/series.h"
+	"bvar/variable.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/bvar/detail/sampler.h
+	<vector>
+	"butil/containers/linked_list.h"
+	"butil/scoped_lock.h"
+	"butil/logging.h"
+	"butil/containers/bounded_queue.h"
+	"butil/type_traits.h"
+	"butil/time.h"
+	"butil/class_name.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/containers/bounded_queue.h
+	"butil/macros.h"
+	"butil/logging.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/class_name.h
+	<typeinfo>
+	<string>
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/bvar/detail/series.h
+	<math.h>
+	<ostream>
+	"butil/scoped_lock.h"
+	"butil/type_traits.h"
+	"bvar/vector.h"
+	"bvar/detail/call_op_returning_void.h"
+	"butil/string_splitter.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/bvar/vector.h
+	<ostream>
+	<gflags/gflags_declare.h>
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/string_splitter.h
+	<stdlib.h>
+	<stdint.h>
+	"butil/string_splitter_inl.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/string_splitter_inl.h
+	<limits.h>
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/bvar/latency_recorder.h
+	"bvar/recorder.h"
+	"bvar/reducer.h"
+	"bvar/passive_status.h"
+	"bvar/detail/percentile.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/bvar/reducer.h
+	<limits>
+	"butil/logging.h"
+	"butil/type_traits.h"
+	"butil/class_name.h"
+	"bvar/variable.h"
+	"bvar/detail/combiner.h"
+	"bvar/detail/sampler.h"
+	"bvar/detail/series.h"
+	"bvar/window.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/bvar/passive_status.h
+	"bvar/variable.h"
+	"bvar/reducer.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/bvar/detail/percentile.h
+	<string.h>
+	<stdint.h>
+	<limits>
+	<ostream>
+	<algorithm>
+	<math.h>
+	"butil/macros.h"
+	"bvar/reducer.h"
+	"bvar/window.h"
+	"bvar/detail/combiner.h"
+	"bvar/detail/sampler.h"
+	"butil/fast_rand.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/fast_rand.h
+	<stdint.h>
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/bthread/id.h
+	"butil/macros.h"
+	"bthread/types.h"
+
+1567712056 /home/djap/player_project/UCSRMediaPlayer//djap_utils/include/Exception.hpp
+	<stdexcept>
+	<list>
+
+1567712056 source:/home/djap/player_project/UCSRMediaPlayer/djap_utils/src/Exception.cpp
+	"djap_utils/include/Exception.hpp"
+
+1567712056 source:/home/djap/player_project/UCSRMediaPlayer/djap_utils/src/mutex.cpp
+	"djap_utils/include/mutex.hpp"
+
+1567712056 source:/home/djap/player_project/UCSRMediaPlayer/djap_utils/src/mutex_guard.cpp
+	"djap_utils/include/mutex_guard.hpp"
+
+1567712056 /home/djap/player_project/UCSRMediaPlayer//djap_utils/include/mutex_guard.hpp
+	"djap_utils/include/mutex.hpp"
+
+1567712056 source:/home/djap/player_project/UCSRMediaPlayer/djap_utils/src/shared_pointer_base.cpp
+	"djap_utils/include/shared_pointer_base.hpp"
+	"djap_utils/include/mutex_guard.hpp"
+
+1567712056 /home/djap/player_project/UCSRMediaPlayer//djap_utils/include/shared_pointer_base.hpp
+	"djap_utils/include/mutex.hpp"
+
+1567712056 source:/home/djap/player_project/UCSRMediaPlayer/djap_utils/src/thread.cpp
+	"djap_utils/include/thread.hpp"
+
+1567712056 /home/djap/player_project/UCSRMediaPlayer//djap_utils/include/thread.hpp
+	<pthread.h>
+	"djap_utils/include/Exception.hpp"
+	"djap_utils/include/shared_pointer.hpp"
+
+1567712056 /home/djap/player_project/UCSRMediaPlayer//djap_utils/include/shared_pointer.hpp
+	"djap_utils/include/shared_pointer_base.hpp"
+	"djap_utils/include/weak_pointer.hpp"
+
+1567712056 /home/djap/player_project/UCSRMediaPlayer//djap_utils/include/weak_pointer.hpp
+	"djap_utils/include/shared_pointer_base.hpp"
+
+1567785513 source:/home/djap/player_project/UCSRMediaPlayer/mplayer_service/src/main.cpp
+	<gflags/gflags.h>
+	<butil/logging.h>
+	<brpc/server.h>
+	"mplayer_service.hpp"
+	"djap_utils/include/singleton.hpp"
+	"mplayer_controller.hpp"
+	<iostream>
+	<unistd.h>
+	<time.h>
+	"djap_utils/include/mutex.hpp"
+	"djap_utils/include/condition_mutex.hpp"
+	"djap_utils/include/shared_pointer.hpp"
+	"djap_utils/include/thread.hpp"
+
+1567782070 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/gflags/gflags.h
+	<string>
+	<vector>
+	"gflags/gflags_declare.h"
+	"gflags_gflags.h"
+
+1567782070 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/gflags/gflags_gflags.h
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/brpc/server.h
+	"bthread/errno.h"
+	"bthread/bthread.h"
+	<google/protobuf/service.h>
+	"butil/macros.h"
+	"butil/containers/doubly_buffered_data.h"
+	"bvar/bvar.h"
+	"butil/containers/case_ignored_flat_map.h"
+	"butil/ptr_container.h"
+	"brpc/controller.h"
+	"brpc/ssl_options.h"
+	"brpc/describable.h"
+	"brpc/data_factory.h"
+	"brpc/builtin/tabbed.h"
+	"brpc/details/profiler_linker.h"
+	"brpc/health_reporter.h"
+	"brpc/adaptive_max_concurrency.h"
+	"brpc/http2.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/containers/doubly_buffered_data.h
+	<vector>
+	<pthread.h>
+	"butil/scoped_lock.h"
+	"butil/thread_local.h"
+	"butil/logging.h"
+	"butil/macros.h"
+	"butil/type_traits.h"
+	"butil/errno.h"
+	"butil/atomicops.h"
+	"butil/unique_ptr.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/unique_ptr.h
+	"butil/build_config.h"
+	<memory>
+	<algorithm>
+	"butil/type_traits.h"
+	"butil/macros.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/bvar/bvar.h
+	"bvar/reducer.h"
+	"bvar/recorder.h"
+	"bvar/status.h"
+	"bvar/passive_status.h"
+	"bvar/latency_recorder.h"
+	"bvar/gflag.h"
+	"bvar/scoped_timer.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/bvar/status.h
+	<string>
+	"butil/atomicops.h"
+	"butil/type_traits.h"
+	"butil/string_printf.h"
+	"butil/synchronization/lock.h"
+	"bvar/detail/is_atomical.h"
+	"bvar/variable.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/string_printf.h
+	<string>
+	<stdarg.h>
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/bvar/gflag.h
+	<string>
+	"bvar/variable.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/bvar/scoped_timer.h
+	"butil/time.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/containers/case_ignored_flat_map.h
+	"butil/containers/flat_map.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/containers/flat_map.h
+	<stdint.h>
+	<functional>
+	<iostream>
+	"butil/type_traits.h"
+	"butil/logging.h"
+	"butil/find_cstr.h"
+	"butil/single_threaded_pool.h"
+	"butil/containers/hash_tables.h"
+	"butil/bit_array.h"
+	"butil/strings/string_piece.h"
+	"butil/containers/flat_map_inl.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/find_cstr.h
+	<string>
+	<map>
+	<algorithm>
+	"butil/thread_local.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/single_threaded_pool.h
+	<stdlib.h>
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/bit_array.h
+	<stdint.h>
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/containers/flat_map_inl.h
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/ptr_container.h
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/brpc/controller.h
+	<gflags/gflags.h>
+	"butil/intrusive_ptr.hpp"
+	"bthread/errno.h"
+	"butil/endpoint.h"
+	"butil/iobuf.h"
+	"bthread/types.h"
+	"brpc/options.pb.h"
+	"brpc/errno.pb.h"
+	"brpc/http_header.h"
+	"brpc/authenticator.h"
+	"brpc/socket_id.h"
+	"brpc/stream.h"
+	"brpc/stream_creator.h"
+	"brpc/protocol.h"
+	"brpc/traceprintf.h"
+	"brpc/reloadable_flags.h"
+	"brpc/closure_guard.h"
+	"brpc/callback.h"
+	"brpc/progressive_attachment.h"
+	"brpc/progressive_reader.h"
+	"brpc/grpc.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/intrusive_ptr.hpp
+	<functional>
+	<cstddef>
+	<ostream>
+	"butil/build_config.h"
+	"butil/containers/hash_tables.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/endpoint.h
+	<netinet/in.h>
+	<iostream>
+	"butil/containers/hash_tables.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/iobuf.h
+	<sys/uio.h>
+	<stdint.h>
+	<string>
+	<ostream>
+	<google/protobuf/io/zero_copy_stream.h>
+	"butil/strings/string_piece.h"
+	"butil/third_party/snappy/snappy-sinksource.h"
+	"butil/zero_copy_stream_as_streambuf.h"
+	"butil/macros.h"
+	"butil/reader_writer.h"
+	"butil/binary_printer.h"
+	<algorithm>
+	<utility>
+	"butil/iobuf_inl.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/third_party/snappy/snappy-sinksource.h
+	<stddef.h>
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/zero_copy_stream_as_streambuf.h
+	<streambuf>
+	<google/protobuf/io/zero_copy_stream.h>
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/reader_writer.h
+	<sys/uio.h>
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/binary_printer.h
+	"butil/strings/string_piece.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/iobuf_inl.h
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/brpc/options.pb.h
+	<string>
+	<google/protobuf/stubs/common.h>
+	<google/protobuf/io/coded_stream.h>
+	<google/protobuf/arena.h>
+	<google/protobuf/arenastring.h>
+	<google/protobuf/generated_message_table_driven.h>
+	<google/protobuf/generated_message_util.h>
+	<google/protobuf/inlined_string_field.h>
+	<google/protobuf/metadata.h>
+	<google/protobuf/message.h>
+	<google/protobuf/repeated_field.h>
+	<google/protobuf/extension_set.h>
+	<google/protobuf/generated_enum_reflection.h>
+	<google/protobuf/unknown_field_set.h>
+	<google/protobuf/descriptor.pb.h>
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/brpc/errno.pb.h
+	<string>
+	<google/protobuf/stubs/common.h>
+	<google/protobuf/io/coded_stream.h>
+	<google/protobuf/arena.h>
+	<google/protobuf/arenastring.h>
+	<google/protobuf/generated_message_table_driven.h>
+	<google/protobuf/generated_message_util.h>
+	<google/protobuf/inlined_string_field.h>
+	<google/protobuf/metadata.h>
+	<google/protobuf/repeated_field.h>
+	<google/protobuf/extension_set.h>
+	<google/protobuf/generated_enum_reflection.h>
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/brpc/http_header.h
+	"butil/strings/string_piece.h"
+	"butil/containers/case_ignored_flat_map.h"
+	"brpc/uri.h"
+	"brpc/http_method.h"
+	"brpc/http_status_code.h"
+	"brpc/http2.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/brpc/uri.h
+	<string>
+	"butil/containers/flat_map.h"
+	"butil/status.h"
+	"butil/string_splitter.h"
+	<algorithm>
+	<utility>
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/status.h
+	<stdarg.h>
+	<stdlib.h>
+	<string>
+	<ostream>
+	"butil/strings/string_piece.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/brpc/http_method.h
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/brpc/http_status_code.h
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/brpc/http2.h
+	"brpc/http_status_code.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/brpc/authenticator.h
+	<ostream>
+	"butil/endpoint.h"
+	"butil/macros.h"
+	"brpc/extension.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/brpc/extension.h
+	<string>
+	"butil/scoped_lock.h"
+	"butil/logging.h"
+	"butil/containers/case_ignored_flat_map.h"
+	"butil/memory/singleton_on_pthread_once.h"
+	"brpc/extension_inl.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/memory/singleton_on_pthread_once.h
+	<pthread.h>
+	"butil/atomicops.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/brpc/extension_inl.h
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/brpc/socket_id.h
+	<stdint.h>
+	"butil/unique_ptr.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/brpc/stream.h
+	"butil/iobuf.h"
+	"butil/scoped_generic.h"
+	"brpc/socket_id.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/scoped_generic.h
+	<stdlib.h>
+	<algorithm>
+	"butil/compiler_specific.h"
+	"butil/move.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/move.h
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/brpc/stream_creator.h
+	"brpc/socket_id.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/brpc/protocol.h
+	<vector>
+	<stdint.h>
+	<gflags/gflags_declare.h>
+	"butil/endpoint.h"
+	"butil/iobuf.h"
+	"butil/logging.h"
+	"brpc/options.pb.h"
+	"brpc/socket_id.h"
+	"brpc/parse_result.h"
+	"brpc/adaptive_connection_type.h"
+	"brpc/adaptive_protocol_type.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/brpc/parse_result.h
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/brpc/adaptive_connection_type.h
+	"butil/strings/string_piece.h"
+	"brpc/options.pb.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/brpc/adaptive_protocol_type.h
+	"butil/strings/string_piece.h"
+	"brpc/options.pb.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/brpc/traceprintf.h
+	"butil/macros.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/brpc/reloadable_flags.h
+	<stdint.h>
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/brpc/closure_guard.h
+	<google/protobuf/service.h>
+	"butil/macros.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/brpc/callback.h
+	<google/protobuf/stubs/common.h>
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/brpc/progressive_attachment.h
+	"butil/atomicops.h"
+	"butil/iobuf.h"
+	"butil/endpoint.h"
+	"bthread/types.h"
+	"brpc/socket_id.h"
+	"brpc/shared_object.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/brpc/shared_object.h
+	"butil/intrusive_ptr.hpp"
+	"butil/atomicops.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/brpc/progressive_reader.h
+	"brpc/shared_object.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/brpc/grpc.h
+	<map>
+	<brpc/http2.h>
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/brpc/ssl_options.h
+	<string>
+	<vector>
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/brpc/describable.h
+	<ostream>
+	"butil/macros.h"
+	"butil/class_name.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/brpc/data_factory.h
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/brpc/builtin/tabbed.h
+	<string>
+	<vector>
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/brpc/details/profiler_linker.h
+	"butil/gperftools_profiler.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/butil/gperftools_profiler.h
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/brpc/health_reporter.h
+	"brpc/controller.h"
+
+1567781970 /home/djap/player_project/UCSRMediaPlayer/third_party/brpc/include/brpc/adaptive_max_concurrency.h
+	"butil/strings/string_piece.h"
+	"brpc/options.pb.h"
+
+1567712056 /home/djap/player_project/UCSRMediaPlayer/mplayer_service/include/mplayer_service.hpp
+	"player_service.pb.h"
+
+1567712056 /home/djap/player_project/UCSRMediaPlayer/player_interface/player_service.pb.h
+	<string>
+	<google/protobuf/stubs/common.h>
+	<google/protobuf/io/coded_stream.h>
+	<google/protobuf/arena.h>
+	<google/protobuf/arenastring.h>
+	<google/protobuf/generated_message_table_driven.h>
+	<google/protobuf/generated_message_util.h>
+	<google/protobuf/inlined_string_field.h>
+	<google/protobuf/metadata.h>
+	<google/protobuf/message.h>
+	<google/protobuf/repeated_field.h>
+	<google/protobuf/extension_set.h>
+	<google/protobuf/generated_enum_reflection.h>
+	<google/protobuf/service.h>
+	<google/protobuf/unknown_field_set.h>
+
+1567712056 source:/home/djap/player_project/UCSRMediaPlayer/mplayer_service/src/mplayer_service.cpp
+	<butil/logging.h>
+	<brpc/server.h>
+	"mplayer_service.hpp"
+
+1567712056 source:/home/djap/player_project/UCSRMediaPlayer/player_interface/player_service.pb.cc
+	"player_service.pb.h"
+	<algorithm>
+	<google/protobuf/stubs/common.h>
+	<google/protobuf/stubs/port.h>
+	<google/protobuf/io/coded_stream.h>
+	<google/protobuf/wire_format_lite_inl.h>
+	<google/protobuf/descriptor.h>
+	<google/protobuf/generated_message_reflection.h>
+	<google/protobuf/reflection_ops.h>
+	<google/protobuf/wire_format.h>
+	"third_party/protobuf/version.h"
+
+1567784408 source:/home/djap/player_project/UCSRMediaPlayer/mplayer_service/src/mplayer_controller.cpp
+	<unistd.h>
+	"mplayer_controller.hpp"
+
+1567785131 /home/djap/player_project/UCSRMediaPlayer/mplayer_service/include/mplayer_controller.hpp
+	<string>
+
+1567786182 /home/djap/player_project/UCSRMediaPlayer//djap_utils/include/singleton.hpp
+	"shared_pointer.hpp"
+	"mutex.hpp"
+	"mutex_guard.hpp"
+
