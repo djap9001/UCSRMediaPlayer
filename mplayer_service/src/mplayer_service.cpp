@@ -18,6 +18,8 @@
 #include <butil/logging.h>
 #include <brpc/server.h>
 #include "mplayer_service.hpp"
+#include "mplayer_controller.hpp"
+#include "djap_utils/include/singleton.hpp"
 
 namespace player_service {
 
@@ -26,6 +28,8 @@ void MplayerService::PlayerProperties(::google::protobuf::RpcController* control
                        ::player_service::PlayerPropertiesResponse* response,
                        ::google::protobuf::Closure* done)
 {
+    DjapUtils::SharedPointer<MPlayerController> controller_instance = DjapUtils::Singleton<MPlayerController>::get_instance();
+   controller_instance->seek(23);
     brpc::ClosureGuard done_guard(done);
     // Fill response.
     // TODO this might be better to get from config
@@ -71,6 +75,7 @@ void MplayerService::PushToPlaylist(::google::protobuf::RpcController* controlle
     response->set_error_code(0);
     response->set_error_message(std::string("OK"));
     response->set_playlist_index(0);
+
 }
 
 void MplayerService::PlaybackControl(::google::protobuf::RpcController* controller,
@@ -84,6 +89,9 @@ void MplayerService::PlaybackControl(::google::protobuf::RpcController* controll
     response->set_error_message(std::string("OK"));
         // for debug while develop
     printf("Received PlaybackControl request\n");
+    DjapUtils::SharedPointer<MPlayerController> controller_instance = DjapUtils::Singleton<MPlayerController>::get_instance();
+    controller_instance->stop(); // TODO just testing, remove me...
+
 }
 
 } // namespace player_service

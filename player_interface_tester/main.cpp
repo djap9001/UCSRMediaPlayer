@@ -16,7 +16,7 @@ DEFINE_string(server, "127.0.0.1:8000", "IP Address of server");
 DEFINE_string(load_balancer, "", "The algorithm for load balancing");
 DEFINE_int32(timeout_ms, 100, "RPC timeout in milliseconds");
 DEFINE_int32(max_retry, 3, "Max retries(not including the first RPC)");
-DEFINE_int32(interval_ms, 1000, "Milliseconds between consecutive requests");
+DEFINE_int32(interval_ms, 10000, "Milliseconds between consecutive requests");
 
 DEFINE_string(test_mp3_file, "/home/pi/Documents/amaranth.mp3", "Path for test file while pushing to playlist");
 
@@ -143,6 +143,7 @@ int main(int argc, char* argv[]) {
     // Loop to send test requests
     while (!brpc::IsAskedToQuit()) {
         send_player_properties_request(stub);
+        usleep(FLAGS_interval_ms * 1000L);
         send_push_to_playlist_request(stub);
         send_playback_control_request(stub);
         send_reset_playlist_request(stub);

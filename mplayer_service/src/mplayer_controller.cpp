@@ -15,11 +15,50 @@
   * support for controlling mplayer
   */
 #include <unistd.h>
+#include <fcntl.h>
+#include <sys/epoll.h>
 #include "mplayer_controller.hpp"
+#include <bthread/unstable.h>   // bthread_fd_timedwait()
+#include <bthread/bthread.h>
 
 namespace player_service {
 
+void MplayerReader::set_read_fd(int fd) {
+    _read_fd = fd;
+}
+
+void MplayerReader::stop() {
+    _stop_requested = true;
+    this->join();
+}
+
+MplayerReader::MplayerReader() {
+    _stop_requested = false;
+}
+
+MplayerReader::~MplayerReader() {
+
+}
+
+void MplayerReader::thread_main() {
+    char read_buf[1024];
+    while (false == _stop_requested) {
+        timespec t = butil::milliseconds_from_now(3000);
+        int ret = bthread_fd_timedwait(_read_fd, EPOLLIN, &t);
+        LOG(DEBUG) << "bthread_fd_timedwait return " << ret;
+        if (ret >= 0) {
+            //  Has something to read
+            size_t got_bytes_count = read(_read_fd, read_buf, 1024);
+            if  (got_bytes_count > 0) {
+                LOG(DEBUG) << "Got " << got_bytes_count << " bytes from read fd";
+                LOG(DEBUG) << "Mplayer said: [" << read_buf << "]";
+            }
+        }
+    }
+}
+
 MPlayerController::MPlayerController() {
+    LOG(DEBUG) << "Alloc mplayer controller!";
     init_mplayer_process();
 }
 
@@ -46,16 +85,31 @@ void MPlayerController::init_mplayer_process() {
         //exec mplayer process
         char filename[] = "/usr/bin/mplayer";
         char *newargv[] = {"mplayer", "-slave", "-idle", "-quiet", NULL};
-        char *newenviron[] = { NULL };
-        execve(filename, newargv, newenviron);
+        // TODO a proper environment
+        //char *newenviron[] = { NULL };
+        execvp(filename, newargv);
+        //execve(filename, newargv, newenviron);
     } else {
+        LOG(DEBUG) << "MPlayer PID: " << mplayerPID;
         //this is parent, keep as mplayer control server...
-        close(mplayer_to_controller[0]);    //Close the reading end of the outgoing pipe.
-        close(controller_to_mplayer[1]);    //Close the writing side of the incoming pipe.
+        close(controller_to_mplayer[0]);    //Close the reading end of the outgoing pipe.
+        close(mplayer_to_controller[1]);    //Close the writing side of the incoming pipe.
 
         // store the remaining file descriptors for later use.
-        _mplayer_process_write_fd = mplayer_to_controller[1];
-        _mplayer_process_read_fd = controller_to_mplayer[0];
+        _mplayer_process_write_fd = controller_to_mplayer[1];
+        _mplayer_process_read_fd = mplayer_to_controller[0];
+        // make both non_blocking
+        /*
+        fcntl(_mplayer_process_write_fd,
+              F_SETFL,
+              (fcntl(_mplayer_process_write_fd, F_GETFL) | O_NONBLOCK));
+        fcntl(_mplayer_process_read_fd,
+              F_SETFL,
+              (fcntl(_mplayer_process_read_fd, F_GETFL) | O_NONBLOCK));
+        */
+        _reader = MplayerReader::alloc<MplayerReader>();
+        _reader->set_read_fd(_mplayer_process_read_fd);
+        _reader->start();
     }
 }
 
@@ -76,7 +130,12 @@ int MPlayerController::set_volume(int volume) {
 }
 
 int MPlayerController::stop() {
-
+    std::string command = std::string("loadfile ") + std::string("/home/djap/palvoja.mp3") + std::string("\n");
+    LOG(DEBUG) << "Write to mplayer return: "
+               << write(_mplayer_process_write_fd, command.c_str(), command.size());
+    LOG(DEBUG) << "Sleeping...";
+    bthread_usleep(1000*2000);
+    LOG(DEBUG) << "Sleeped!";
 }
 
 void MPlayerController::seek(int pos) {

@@ -18,8 +18,28 @@
 #define _MPLAYER_SERVICE_MPLAYER_CONTROLLER_HPP_
 
 #include <string>
+#include "djap_utils/include/thread.hpp"
 
 namespace player_service {
+
+/*
+ * Reader thread for reading from mplayer process.
+ */
+class MplayerReader : public DjapUtils::Thread {
+public:
+    void set_read_fd(int fd);
+    void stop();
+protected:
+    MplayerReader();
+    virtual ~MplayerReader();
+    virtual void thread_main();
+private:
+    bool _stop_requested;
+    int _read_fd;
+    friend class DjapUtils::SharedPointer<MplayerReader>;
+    friend class DjapUtils::Thread;
+};
+
 class MPlayerController {
 public:
     MPlayerController();
@@ -34,6 +54,7 @@ private:
     void init_mplayer_process();
     int _mplayer_process_write_fd;
     int _mplayer_process_read_fd;
+    DjapUtils::SharedPointer<MplayerReader> _reader;
 };
 
 }
