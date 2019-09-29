@@ -95,7 +95,80 @@ DEFINE_int32(idle_timeout_s, -1, "Connection will be closed if there is no "
 DEFINE_int32(logoff_ms, 2000, "Maximum duration of server's LOGOFF state "
              "(waiting for client to close connection before server stops)");
 
+#include "mplayer_controller.hpp"
+#include "djap_utils/include/singleton.hpp"
+namespace player_service {
+class MplayerEventListener : public MplayerControllerDelegate {
+public:
+    MplayerEventListener() {
+
+    }
+
+    virtual ~MplayerEventListener() {
+
+    }
+
+    virtual void did_start(const std::string& filename)
+    {
+        LOG(DEBUG) << "MplayerControllerDelegate::did_start("
+                   << filename
+                   << ")";
+    }
+    virtual void did_end(const std::string& error)
+    {
+
+    }
+    virtual void did_pause()
+    {
+
+    }
+    virtual void did_resume()
+    {
+
+    }
+    virtual void did_get_info_track_artist(const std::string& artist)
+    {
+        LOG(DEBUG) << "MplayerControllerDelegate::did_get_info_track_artist("
+                   << artist
+                   << ")";
+    }
+    virtual void did_get_info_track_name(const std::string& name)
+    {
+        LOG(DEBUG) << "MplayerControllerDelegate::did_get_info_track_name("
+                   << name
+                   << ")";
+    }
+    virtual void did_get_info_track_album(const std::string& album)
+    {
+        LOG(DEBUG) << "MplayerControllerDelegate::did_get_info_track_album("
+                   << album
+                   << ")";
+    }
+    virtual void did_get_info_track_progress(uint64_t progress_ms)
+    {
+
+    }
+    virtual void did_get_info_track_volume(uint64_t volume_percent)
+    {
+
+    }
+};
+
+void test_mplayer_interface() {
+    DjapUtils::SharedPointer<MPlayerController> controller_instance = DjapUtils::Singleton<MPlayerController>::get_instance();
+    DjapUtils::SharedPointer<MplayerControllerDelegate> listener(new MplayerEventListener);
+    controller_instance->set_delegate(listener);
+    controller_instance->set_file(std::string("/home/djap/palvoja.mp3"));
+    controller_instance->play();
+    sleep(500);
+    controller_instance->stop();
+}
+}
+
 int main(int argc, char** argv) {
+    player_service::test_mplayer_interface();
+    return 0;
+    /*
     // Parse gflags. We recommend you to use gflags as well.
     GFLAGS_NAMESPACE::ParseCommandLineFlags(&argc, &argv, true);
 
@@ -125,4 +198,5 @@ int main(int argc, char** argv) {
     // Wait until Ctrl-C is pressed, then Stop() and Join() the server.
     server.RunUntilAskedToQuit();
     return 0;
+    */
 }
