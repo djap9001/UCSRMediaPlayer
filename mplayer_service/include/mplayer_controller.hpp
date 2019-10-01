@@ -19,6 +19,7 @@
 
 #include <string>
 #include "djap_utils/include/thread.hpp"
+#include "djap_utils/include/condition_mutex.hpp"
 
 namespace player_service {
 
@@ -61,6 +62,28 @@ private:
     friend class DjapUtils::Thread;
 };
 
+class MplayerWriter : public DjapUtils::Thread {
+public:
+    void set_write_fd(int fd);
+    void write_command(const std::string& command);
+    void stop();
+protected:
+    MplayerWriter();
+    virtual ~MplayerWriter();
+    virtual void thread_main();
+private:
+    void push_message(int command_type, const std::string& command_param);
+    std::pair<int,std::string> pop_message();
+private:
+    static const int WRITER_COMMAND_TYPE_STOP;
+    static const int WRITER_COMMAND_TYPE_WRITE_TO_MPLAYER;
+    int _write_fd;
+    DjapUtils::ConditionMutex _message_queue_mutex;
+    std::list< std::pair<int, std::string> > _message_queue;
+    friend class DjapUtils::SharedPointer<MplayerWriter>;
+    friend class DjapUtils::Thread;
+};
+
 class MPlayerController {
 public:
     MPlayerController();
@@ -77,6 +100,7 @@ private:
     int _mplayer_process_write_fd;
     int _mplayer_process_read_fd;
     DjapUtils::SharedPointer<MplayerReader> _reader;
+    DjapUtils::SharedPointer<MplayerWriter> _writer;
     DjapUtils::SharedPointer<MplayerControllerDelegate> _delegate;
 
     std::string _file_name;

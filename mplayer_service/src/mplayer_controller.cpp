@@ -53,7 +53,7 @@ void MplayerReader::set_delegate(DjapUtils::WeakPointer<MplayerControllerDelegat
 
 void MplayerReader::stop() {
     _stop_requested = true;
-    this->join();
+    join();
 }
 
 MplayerReader::MplayerReader() {
@@ -201,6 +201,61 @@ void MplayerReader::process_event(const std::string& event_buffer) {
     }
 }
 
+const int MplayerWriter::WRITER_COMMAND_TYPE_STOP = 0;
+const int MplayerWriter::WRITER_COMMAND_TYPE_WRITE_TO_MPLAYER = 1;
+
+void MplayerWriter::set_write_fd(int fd) {
+    _write_fd = fd;
+}
+
+void MplayerWriter::write_command(const std::string& command) {
+    push_message(WRITER_COMMAND_TYPE_WRITE_TO_MPLAYER, command);
+}
+
+void MplayerWriter::stop() {
+    push_message(WRITER_COMMAND_TYPE_STOP, std::string(""));
+    join();
+}
+
+MplayerWriter::MplayerWriter() {
+    _write_fd = -1;
+}
+
+MplayerWriter::~MplayerWriter() {
+
+}
+
+void MplayerWriter::thread_main() {
+    while (true) {
+        std::pair<int,std::string> command = pop_message();
+        if (command.first == WRITER_COMMAND_TYPE_WRITE_TO_MPLAYER) {
+            // TODO do the non-blocking write and check for success (EWOULDBLOCK or something like that).
+            write(_write_fd, command.second.c_str(), command.second.size());
+        } else if (command.first == WRITER_COMMAND_TYPE_STOP) {
+            break;
+        }
+    }
+}
+
+void MplayerWriter::push_message(int command_type, const std::string& command_param) {
+    _message_queue_mutex.lock();
+    _message_queue.push_back(std::make_pair(command_type, command_param));
+    _message_queue_mutex.unlock();
+    _message_queue_mutex.Signal();
+}
+
+std::pair<int,std::string> MplayerWriter::pop_message() {
+    std::pair<int,std::string> ret;
+    _message_queue_mutex.lock();
+    while (_message_queue.empty()) {
+        _message_queue_mutex.Wait();
+    }
+    ret = _message_queue.front();
+    _message_queue.pop_front();
+    _message_queue_mutex.unlock();
+    return ret;
+}
+
 MPlayerController::MPlayerController() {
     LOG(DEBUG) << "Alloc mplayer controller!";
     init_mplayer_process();
@@ -208,8 +263,9 @@ MPlayerController::MPlayerController() {
 }
 
 MPlayerController::~MPlayerController() {
-    std::string command("quit\n");
-    write(_mplayer_process_write_fd, command.c_str(), command.size());
+    _writer->write_command("quit\n");
+    _reader->stop();
+    _writer->stop();
 }
 
 void MPlayerController::init_mplayer_process() {
@@ -257,6 +313,10 @@ void MPlayerController::init_mplayer_process() {
         _reader = MplayerReader::alloc<MplayerReader>();
         _reader->set_read_fd(_mplayer_process_read_fd);
         _reader->start();
+
+        _writer = MplayerWriter::alloc<MplayerWriter>();
+        _writer->set_write_fd(_mplayer_process_write_fd);
+        _writer->start();
     }
 }
 
@@ -279,8 +339,9 @@ int MPlayerController::play() {
     }
 
     std::string command = std::string("loadfile ") + _file_name + std::string("\n");
-    LOG(DEBUG) << "Write to mplayer return: "
-               << write(_mplayer_process_write_fd, command.c_str(), command.size());
+    _writer->write_command(command);
+    //LOG(DEBUG) << "Write to mplayer return: "
+    //           << write(_mplayer_process_write_fd, command.c_str(), command.size());
     //write(_mplayer_process_write_fd, command.c_str(), command.size());
     /*
     iMplayerProcess->write( QString("get_property filename\n").toLocal8Bit() );
@@ -300,8 +361,7 @@ int MPlayerController::play() {
 }
 
 int MPlayerController::pause() {
-    std::string command("pause\n");
-    write(_mplayer_process_write_fd, command.c_str(), command.size());
+    _writer->write_command("pause\n");
     return 0;
 }
 
@@ -312,14 +372,11 @@ int MPlayerController::set_volume(int volume) {
             volume = 0;
     std::stringstream ss;
     ss << "set_property volume " << volume << "\n";
-    std::string command = ss.str();
-    write(_mplayer_process_write_fd, command.c_str(), command.size());
+    _writer->write_command(ss.str());
 }
 
 int MPlayerController::stop() {
-
-    std::string command("stop\n");
-    write(_mplayer_process_write_fd, command.c_str(), command.size());
+    _writer->write_command("stop\n");
 }
 
 void MPlayerController::seek(int pos) {
