@@ -19,6 +19,9 @@
   */
 
 #include "djap_utils/include/condition_mutex.hpp"
+#ifndef _USE_BAIDU_THREADS_
+#include <sys/time.h>
+#endif
 
 namespace DjapUtils {
 ConditionMutex::ConditionMutex() : Mutex()
@@ -71,7 +74,21 @@ bool ConditionMutex::timed_wait(uint32_t wait_max_milliseconds) {
     } else {
     }
 #else
-#warning "missing implementation!"
+    struct timeval tp;
+    struct timespec ts;
+    gettimeofday(&tp, nullptr);
+
+    ts.tv_sec = tp.tv_sec;
+    uint64_t wait_ns = ((static_cast<uint64_t>(wait_max_milliseconds) * 1000000) + static_cast<uint64_t>(tp.tv_usec * 1000));
+    ts.tv_sec += (wait_ns / 1000000000L);
+    ts.tv_nsec = (wait_ns % 1000000000L);
+    int wait_result = pthread_cond_timedwait(&_cond, underlying_mutex(), &ts);
+    if (0 == wait_result) {
+        ret = true;
+    } else if (wait_result == ETIMEDOUT) {
+        ret = false;
+    } else {
+    }
 #endif // _USE_BAIDU_THREADS_
     return ret;
 }
