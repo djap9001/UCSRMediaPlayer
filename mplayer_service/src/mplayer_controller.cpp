@@ -21,6 +21,11 @@
 #include"djap_utils/include/mutex_guard.hpp"
 #include <bthread/unstable.h>   // bthread_fd_timedwait()
 #include <bthread/bthread.h>
+#include <gflags/gflags.h>
+
+DEFINE_int32(mplayer_progress_update_interval_ms,
+            500,
+             "Interval for asking playback progress updates from mplayer");
 
 namespace player_service {
 
@@ -32,7 +37,7 @@ const std::string g_v_ratio_event_identifier("ANS_aspect");
 const std::string g_v_width_event_identifier("ANS_width");
 const std::string g_v_height_event_identifier("ANS_height");
 const std::string g_file_name_event_identifier("ANS_filename");
-const std::string g_play_pos_event_identifier("ANS_time_pos");
+const std::string g_play_pos_event_identifier("ANS_time_pos=");
 const std::string g_track_title_event_identifier(" Title: ");
 const std::string g_track_title2_event_identifier(" title: ");
 const std::string g_track_name_event_identifier(" Name: ");
@@ -144,7 +149,16 @@ void MplayerReader::process_event(const std::string& event_buffer) {
     }
     */
     if (0 == event_buffer.find(g_play_pos_event_identifier)) {
-
+        DjapUtils::MutexGuard lock(_delegate_lock);
+        DjapUtils::SharedPointer<MplayerControllerDelegate> cb_delegate = _delegate;
+        if (nullptr != cb_delegate.raw_ptr()) {
+            std::string progress_str = event_buffer.substr(
+                        g_play_pos_event_identifier.size(),
+                        (event_buffer.size() - g_play_pos_event_identifier.size())
+                        );
+            double progress_second = strtod(progress_str.c_str(), nullptr);
+            cb_delegate->did_get_info_track_progress(static_cast<uint64_t>(progress_second * 1000));
+        }
     }
     if (0 == event_buffer.find(g_track_title_event_identifier)) {
 
@@ -230,7 +244,7 @@ void MplayerWriter::thread_main() {
         std::pair<int,std::string> command = pop_message();
         if (command.first == WRITER_COMMAND_TYPE_WRITE_TO_MPLAYER) {
             // TODO do the non-blocking write and check for success (EWOULDBLOCK or something like that).
-            write(_write_fd, command.second.c_str(), command.second.size());
+            int res = write(_write_fd, command.second.c_str(), command.second.size());
         } else if (command.first == WRITER_COMMAND_TYPE_STOP) {
             break;
         }
@@ -256,6 +270,38 @@ std::pair<int,std::string> MplayerWriter::pop_message() {
     return ret;
 }
 
+void PlaybackProgressUpdater::set_writer(DjapUtils::WeakPointer<MplayerWriter> writer) {
+    _writer = writer;
+}
+
+PlaybackProgressUpdater::PlaybackProgressUpdater() {
+    _stop = false;
+}
+
+PlaybackProgressUpdater::~PlaybackProgressUpdater() {
+
+}
+void PlaybackProgressUpdater::stop() {
+    _sleeper.lock();
+    _stop = true;
+    _sleeper.unlock();
+    _sleeper.Signal();
+}
+void PlaybackProgressUpdater::thread_main() {
+    _sleeper.lock();
+    while (false == _stop) {
+        do {
+            DjapUtils::SharedPointer<MplayerWriter> writer = _writer;
+            if (nullptr != writer.raw_ptr()) {
+                writer->write_command("get_property time_pos\n");
+            }
+        } while (false);
+        _sleeper.timed_wait(FLAGS_mplayer_progress_update_interval_ms); // interruptible sleep
+    }
+    _sleeper.unlock();
+}
+
+
 MPlayerController::MPlayerController() {
     LOG(DEBUG) << "Alloc mplayer controller!";
     init_mplayer_process();
@@ -266,6 +312,7 @@ MPlayerController::~MPlayerController() {
     _writer->write_command("quit\n");
     _reader->stop();
     _writer->stop();
+    _progress_updater->stop();
 }
 
 void MPlayerController::init_mplayer_process() {
@@ -317,6 +364,10 @@ void MPlayerController::init_mplayer_process() {
         _writer = MplayerWriter::alloc<MplayerWriter>();
         _writer->set_write_fd(_mplayer_process_write_fd);
         _writer->start();
+
+        _progress_updater = PlaybackProgressUpdater::alloc<PlaybackProgressUpdater>();
+        _progress_updater->set_writer(_writer.to_weak());
+        _progress_updater->start();
     }
 }
 

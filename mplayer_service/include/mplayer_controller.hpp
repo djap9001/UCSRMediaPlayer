@@ -84,6 +84,21 @@ private:
     friend class DjapUtils::Thread;
 };
 
+class PlaybackProgressUpdater : public DjapUtils::Thread {
+public:
+    void set_writer(DjapUtils::WeakPointer<MplayerWriter> writer);
+    void stop();
+protected:
+    PlaybackProgressUpdater();
+    virtual ~PlaybackProgressUpdater();
+    virtual void thread_main();
+    DjapUtils::WeakPointer<MplayerWriter> _writer;
+    DjapUtils::ConditionMutex _sleeper;
+    bool _stop;
+    friend class DjapUtils::SharedPointer<PlaybackProgressUpdater>;
+    friend class DjapUtils::Thread;
+};
+
 class MPlayerController {
 public:
     MPlayerController();
@@ -101,6 +116,7 @@ private:
     int _mplayer_process_read_fd;
     DjapUtils::SharedPointer<MplayerReader> _reader;
     DjapUtils::SharedPointer<MplayerWriter> _writer;
+    DjapUtils::SharedPointer<PlaybackProgressUpdater> _progress_updater;
     DjapUtils::SharedPointer<MplayerControllerDelegate> _delegate;
 
     std::string _file_name;

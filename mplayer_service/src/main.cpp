@@ -146,7 +146,9 @@ public:
     }
     virtual void did_get_info_track_progress(uint64_t progress_ms)
     {
-
+        LOG(DEBUG) << "MplayerControllerDelegate::did_get_info_track_progress("
+                   << progress_ms
+                   << ")";
     }
     virtual void did_get_info_track_volume(uint64_t volume_percent)
     {
@@ -160,7 +162,7 @@ void test_mplayer_interface() {
     controller_instance->set_delegate(listener);
     controller_instance->set_file(std::string("/home/djap/palvoja.mp3"));
     controller_instance->play();
-    sleep(500);
+    sleep(30);
     controller_instance->stop();
 }
 }
