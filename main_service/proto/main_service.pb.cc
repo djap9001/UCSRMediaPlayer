@@ -66,7 +66,7 @@ void InitDefaults() {
 }
 
 ::google::protobuf::Metadata file_level_metadata[2];
-const ::google::protobuf::ServiceDescriptor* file_level_service_descriptors[1];
+const ::google::protobuf::ServiceDescriptor* file_level_service_descriptors[2];
 
 const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::main_service::HttpRequest, _has_bits_),
@@ -114,10 +114,13 @@ void AddDescriptorsImpl() {
       "\n\022main_service.proto\022\014main_service\"\r\n\013Ht"
       "tpRequest\"\016\n\014HttpResponse2S\n\013HttpService"
       "\022D\n\013PageRequest\022\031.main_service.HttpReque"
-      "st\032\032.main_service.HttpResponseB\003\200\001\001"
+      "st\032\032.main_service.HttpResponse2`\n\030Static"
+      "HttpContentService\022D\n\013PageRequest\022\031.main"
+      "_service.HttpRequest\032\032.main_service.Http"
+      "ResponseB\003\200\001\001"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 155);
+      descriptor, 253);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "main_service.proto", &protobuf_RegisterTypes);
 }
@@ -577,6 +580,90 @@ HttpService_Stub::~HttpService_Stub() {
 }
 
 void HttpService_Stub::PageRequest(::google::protobuf::RpcController* controller,
+                              const ::main_service::HttpRequest* request,
+                              ::main_service::HttpResponse* response,
+                              ::google::protobuf::Closure* done) {
+  channel_->CallMethod(descriptor()->method(0),
+                       controller, request, response, done);
+}
+// ===================================================================
+
+StaticHttpContentService::~StaticHttpContentService() {}
+
+const ::google::protobuf::ServiceDescriptor* StaticHttpContentService::descriptor() {
+  protobuf_main_5fservice_2eproto::protobuf_AssignDescriptorsOnce();
+  return protobuf_main_5fservice_2eproto::file_level_service_descriptors[1];
+}
+
+const ::google::protobuf::ServiceDescriptor* StaticHttpContentService::GetDescriptor() {
+  return descriptor();
+}
+
+void StaticHttpContentService::PageRequest(::google::protobuf::RpcController* controller,
+                         const ::main_service::HttpRequest*,
+                         ::main_service::HttpResponse*,
+                         ::google::protobuf::Closure* done) {
+  controller->SetFailed("Method PageRequest() not implemented.");
+  done->Run();
+}
+
+void StaticHttpContentService::CallMethod(const ::google::protobuf::MethodDescriptor* method,
+                             ::google::protobuf::RpcController* controller,
+                             const ::google::protobuf::Message* request,
+                             ::google::protobuf::Message* response,
+                             ::google::protobuf::Closure* done) {
+  GOOGLE_DCHECK_EQ(method->service(), protobuf_main_5fservice_2eproto::file_level_service_descriptors[1]);
+  switch(method->index()) {
+    case 0:
+      PageRequest(controller,
+             ::google::protobuf::down_cast<const ::main_service::HttpRequest*>(request),
+             ::google::protobuf::down_cast< ::main_service::HttpResponse*>(response),
+             done);
+      break;
+    default:
+      GOOGLE_LOG(FATAL) << "Bad method index; this should never happen.";
+      break;
+  }
+}
+
+const ::google::protobuf::Message& StaticHttpContentService::GetRequestPrototype(
+    const ::google::protobuf::MethodDescriptor* method) const {
+  GOOGLE_DCHECK_EQ(method->service(), descriptor());
+  switch(method->index()) {
+    case 0:
+      return ::main_service::HttpRequest::default_instance();
+    default:
+      GOOGLE_LOG(FATAL) << "Bad method index; this should never happen.";
+      return *::google::protobuf::MessageFactory::generated_factory()
+          ->GetPrototype(method->input_type());
+  }
+}
+
+const ::google::protobuf::Message& StaticHttpContentService::GetResponsePrototype(
+    const ::google::protobuf::MethodDescriptor* method) const {
+  GOOGLE_DCHECK_EQ(method->service(), descriptor());
+  switch(method->index()) {
+    case 0:
+      return ::main_service::HttpResponse::default_instance();
+    default:
+      GOOGLE_LOG(FATAL) << "Bad method index; this should never happen.";
+      return *::google::protobuf::MessageFactory::generated_factory()
+          ->GetPrototype(method->output_type());
+  }
+}
+
+StaticHttpContentService_Stub::StaticHttpContentService_Stub(::google::protobuf::RpcChannel* channel)
+  : channel_(channel), owns_channel_(false) {}
+StaticHttpContentService_Stub::StaticHttpContentService_Stub(
+    ::google::protobuf::RpcChannel* channel,
+    ::google::protobuf::Service::ChannelOwnership ownership)
+  : channel_(channel),
+    owns_channel_(ownership == ::google::protobuf::Service::STUB_OWNS_CHANNEL) {}
+StaticHttpContentService_Stub::~StaticHttpContentService_Stub() {
+  if (owns_channel_) delete channel_;
+}
+
+void StaticHttpContentService_Stub::PageRequest(::google::protobuf::RpcController* controller,
                               const ::main_service::HttpRequest* request,
                               ::main_service::HttpResponse* response,
                               ::google::protobuf::Closure* done) {

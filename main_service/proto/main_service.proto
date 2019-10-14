@@ -9,3 +9,7 @@ message HttpResponse {};
 service HttpService {
   rpc PageRequest(HttpRequest) returns (HttpResponse);
 }
+
+service StaticHttpContentService {
+  rpc PageRequest(HttpRequest) returns (HttpResponse);
+}

@@ -5,7 +5,8 @@ CONFIG -= qt
 
 SOURCES += \
         ../main_service/src/main.cpp \
-    ../main_service/proto/main_service.pb.cc
+    ../main_service/proto/main_service.pb.cc \
+    ../main_service/src/static_http_content_service.cpp
 
 HEADERS += \
     ../djap_utils/include/condition_mutex.hpp \
@@ -18,7 +19,8 @@ HEADERS += \
     ../djap_utils/include/thread.hpp \
     ../djap_utils/include/weak_pointer.hpp \
     ../player_interface/player_service.pb.h \
-    ../main_service/proto/main_service.pb.h
+    ../main_service/proto/main_service.pb.h \
+    ../main_service/include/static_http_content_service.hpp
 
 INCLUDEPATH += \
     ../ \
