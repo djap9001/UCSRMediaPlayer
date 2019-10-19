@@ -6,12 +6,20 @@ CONFIG -= qt
 SOURCES += \
         ../main_service/src/main.cpp \
     ../main_service/proto/main_service.pb.cc \
+    ../djap_utils/src/condition_mutex.cpp \
+    ../djap_utils/src/Exception.cpp \
+    ../djap_utils/src/mutex.cpp \
+    ../djap_utils/src/read_write_lock.cpp \
+    ../djap_utils/src/mutex_guard.cpp \
+    ../djap_utils/src/shared_pointer_base.cpp \
+    ../djap_utils/src/thread.cpp \
     ../main_service/src/static_http_content_service.cpp
 
 HEADERS += \
     ../djap_utils/include/condition_mutex.hpp \
     ../djap_utils/include/Exception.hpp \
     ../djap_utils/include/mutex.hpp \
+    ../djap_utils/include/read_write_lock.hpp \
     ../djap_utils/include/mutex_guard.hpp \
     ../djap_utils/include/shared_pointer.hpp \
     ../djap_utils/include/shared_pointer_base.hpp \

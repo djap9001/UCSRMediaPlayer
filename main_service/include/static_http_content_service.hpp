@@ -17,8 +17,17 @@
 #ifndef _MAIN_SERVICE_STATIC_HTTP_CONTENT_SERVICE_HPP_
 #define _MAIN_SERVICE_STATIC_HTTP_CONTENT_SERVICE_HPP_
 #include "main_service.pb.h"
+#include "djap_utils/include/read_write_lock.hpp"
 
 namespace main_service {
+class ServeableContentNode {
+public:
+    ServeableContentNode() : _loaded(false) {}
+    bool _loaded;
+    std::string _filetype;
+    std::string _file_content;
+};
+
 class StaticHttpContentServiceImpl : public StaticHttpContentService {
 public:
     StaticHttpContentServiceImpl() {}
@@ -27,6 +36,12 @@ public:
               const HttpRequest*,
               HttpResponse*,
               google::protobuf::Closure* done);
+    void load_static_content_whitelist();
+private:
+
+private:
+    std::map<std::string,ServeableContentNode> _whitelisted_content;
+    DjapUtils::ReadWriteLock _whitelisted_content_lock;
 };
 } // namespace main_service
 

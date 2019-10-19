@@ -23,7 +23,7 @@ int main(int argc, char* argv[]) {
     brpc::Server server;
 
     main_service::StaticHttpContentServiceImpl static_http_svc;
-
+    static_http_svc.load_static_content_whitelist();
     // Add services into server. Notice the second parameter, because the
     // service is put on stack, we don't want server to delete it, otherwise
     // use brpc::SERVER_OWNS_SERVICE.
