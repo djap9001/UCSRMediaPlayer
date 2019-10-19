@@ -17,8 +17,7 @@
   */
 #ifndef _DJAP_UTILS_MUTEX_HPP_
 #define _DJAP_UTILS_MUTEX_HPP_
-// TODO add bthread support and required macros
-// TODO add read/write lock support
+
 #ifdef _USE_BAIDU_THREADS_
 #include "bthread/bthread.h"
 #else
