@@ -38,6 +38,7 @@ DEFINE_bool(require_login, true,
             "Are users required to login or is this public available to everyone."
             " NOTE: don't forget to enable HTTPS if this is needed!");
 DEFINE_string(login_page_path, "/static/login.html", "Path to login page");
+DEFINE_string(logout_page_path, "/static/logout", "Path to logout");
 DEFINE_string(error_page_list,
               "/home/djap/player_project/UCSRMediaPlayer/main_service/UCSR_main_service/conf/error_pages.txt",
               "List of custom error pages for different http error codes");
@@ -63,20 +64,28 @@ void StaticHttpContentServiceImpl::PageRequest(
     // Fill response.
     _whitelisted_content_lock.read_lock();
 
+    DjapUtils::SharedPointer<LoggedInUserNode> user;
+
     // Check if the requested resource is whitelisted
     LOG(DEBUG) << "Request PATH: " << cntl->http_request().uri().path();
     std::map<std::string,ServeableContentNode>::iterator read_node = _whitelisted_content.find(cntl->http_request().uri().path());
     if (_whitelisted_content.end() != read_node) {
         // Have we login or is the user requesting login page/posting login credentials?
-        if (false == check_login(cntl_base, FLAGS_login_page_path)) {
+        if (false == check_login(cntl_base, FLAGS_login_page_path, user)) {
             _whitelisted_content_lock.read_unlock();
             return;
         }
 
         // Is the user posting login credentials
         // TODO, get rid of the hard coded value?
-        if (true == do_login(cntl_base, "/static/index.html", FLAGS_login_page_path)) {
+        if (true == do_login(cntl_base, "/static/index.html", FLAGS_login_page_path, user)) {
             _whitelisted_content_lock.read_unlock();
+            return;
+        }
+
+        if (cntl->http_request().uri().path() == FLAGS_logout_page_path) {
+            // log the user out and send to login page
+            do_logout(user, cntl_base, FLAGS_login_page_path);
             return;
         }
         // TODO lazy loading if the content is not loaded
@@ -166,7 +175,8 @@ void StaticHttpContentServiceImpl::load_static_content_whitelist() {
 }
 
 bool StaticHttpContentServiceImpl::check_login(google::protobuf::RpcController* cntl_base,
-                                               const std::string& redirect_login_page)
+                                               const std::string& redirect_login_page,
+                                               DjapUtils::SharedPointer<LoggedInUserNode>& out_logged_in_user)
 {
     bool ret = false;   // Not logged in
     brpc::Controller* cntl =
@@ -187,14 +197,15 @@ bool StaticHttpContentServiceImpl::check_login(google::protobuf::RpcController* 
                     if (cookie_it->first == LOGIN_COOKIE_NAME) {
                         // There is a login cookie
                         DjapUtils::MutexGuard guard(_logged_in_users_lock);
-                        std::map<std::string, LoggedInUserNode>::iterator login_it = _logged_in_users.find(cookie_it->second);
+                        std::map<std::string, DjapUtils::SharedPointer<LoggedInUserNode>>::iterator login_it = _logged_in_users.find(cookie_it->second);
                         if (login_it != _logged_in_users.end()) {
                             // I have an entry with the cookie
                             // Check expired
-                            if (login_it->second.has_expired(true)) {
+                            if (login_it->second->has_expired(true)) {
                                 _logged_in_users.erase(login_it);
                                 ret = false;
                             } else {
+                                out_logged_in_user = login_it->second;
                                 ret = true; // User is logged in
                             }
                         }
@@ -217,7 +228,8 @@ bool StaticHttpContentServiceImpl::check_login(google::protobuf::RpcController* 
 
 bool StaticHttpContentServiceImpl::do_login(google::protobuf::RpcController* cntl_base,
                                             const std::string& logged_in_page,
-                                            const std::string& redirect_login_page)
+                                            const std::string& redirect_login_page,
+                                            DjapUtils::SharedPointer<LoggedInUserNode>& out_logged_in_user)
 {
     bool ret = false;
     brpc::Controller* cntl =
@@ -237,10 +249,13 @@ bool StaticHttpContentServiceImpl::do_login(google::protobuf::RpcController* cnt
             std::string password;
             // TODO Check the login parameters
             if (true == check_login_credentials(user_name, password)) {
+                DjapUtils::MutexGuard guard(_logged_in_users_lock);
                 // Set and store cookie if right (don't set cookie if wrong, just redirect back to login page)
                 std::string login_cookie_value = generate_login_cookie_hash();
                 cntl->http_response().SetHeader(std::string("Set-Cookie"), LOGIN_COOKIE_NAME + std::string("=") + login_cookie_value + std::string("; Max-Age=300"));
-                _logged_in_users[login_cookie_value] = LoggedInUserNode(std::string("djap"), std::string("123"), 300);
+                out_logged_in_user = DjapUtils::SharedPointer<LoggedInUserNode>(new LoggedInUserNode(std::string("djap"), std::string("123"), login_cookie_value, 300));
+                _logged_in_users[login_cookie_value] = out_logged_in_user;
+
                 // Send redirect response to index
                 do_redirect(cntl_base, logged_in_page);
             } else {
@@ -251,6 +266,24 @@ bool StaticHttpContentServiceImpl::do_login(google::protobuf::RpcController* cnt
         }
     }
     return ret;
+}
+
+void StaticHttpContentServiceImpl::do_logout(
+        DjapUtils::SharedPointer<LoggedInUserNode> user,
+        google::protobuf::RpcController* cntl_base,
+        const std::string redirect_page)
+{
+    if (nullptr != user.raw_ptr()) {
+        DjapUtils::MutexGuard guard(_logged_in_users_lock);
+        std::map<std::string, DjapUtils::SharedPointer<LoggedInUserNode>>::iterator logout_it =
+                _logged_in_users.find(user->session_key());
+        if (logout_it != _logged_in_users.end()) {
+            _logged_in_users.erase(logout_it);
+        }
+    }
+    if (nullptr != cntl_base) {
+        do_redirect(cntl_base, redirect_page);
+    }
 }
 
 bool StaticHttpContentServiceImpl::check_login_credentials(

@@ -19,6 +19,7 @@
 #include "main_service.pb.h"
 #include "djap_utils/include/read_write_lock.hpp"
 #include "djap_utils/include/mutex.hpp"
+#include "djap_utils/include/shared_pointer.hpp"
 
 namespace main_service {
 class ServeableContentNode {
@@ -33,9 +34,11 @@ class LoggedInUserNode {
 public:
     LoggedInUserNode(const std::string& user_name,
                      const std::string& user_id,
+                     const std::string& session_key,
                      int expire_in_seconds) :
         _user_name(user_name),
         _user_id(user_id),
+        _session_key(session_key),
         _expire_period(expire_in_seconds)
     {
         if (_expire_period > 0) {
@@ -60,6 +63,10 @@ public:
         return _user_id;
     }
 
+    const std::string& session_key() {
+        return  _session_key;
+    }
+
     bool has_expired(bool extend) {
         if (_expire_time == 0) {
             return false;   // never expire
@@ -78,6 +85,7 @@ public:
 private:
     std::string _user_name;
     std::string _user_id;
+    std::string _session_key;
     time_t _expire_time;
     int _expire_period;
 };
@@ -94,11 +102,16 @@ public:
 private:
     bool check_login(
             google::protobuf::RpcController* cntl_base,
-            const std::string& redirect_login_page);
+            const std::string& redirect_login_page,
+            DjapUtils::SharedPointer<LoggedInUserNode>& out_logged_in_user);
     bool do_login(
             google::protobuf::RpcController* cntl_base,
             const std::string& logged_in_page,
-            const std::string& redirect_login_page);
+            const std::string& redirect_login_page,
+            DjapUtils::SharedPointer<LoggedInUserNode>& out_logged_in_user);
+    void do_logout(DjapUtils::SharedPointer<LoggedInUserNode> user,
+                   google::protobuf::RpcController* cntl_base = nullptr,
+                   const std::string redirect_page = std::string());
     bool check_login_credentials(
             const std::string& user_name,
             const std::string& password);
@@ -116,7 +129,7 @@ private:
     std::map <int, std::string> _error_pages;
 
     DjapUtils::Mutex _logged_in_users_lock;
-    std::map<std::string, LoggedInUserNode> _logged_in_users;
+    std::map< std::string, DjapUtils::SharedPointer<LoggedInUserNode> > _logged_in_users;
 };
 } // namespace main_service
 
